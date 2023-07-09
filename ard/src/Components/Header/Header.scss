@@ -1,0 +1,12 @@
+.header_main_div {
+  width: 100%;
+  min-height: 4rem;
+  background-color: var(--blue);
+  padding-left: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  color:  var(--white);
+  border-bottom: solid 2px var(--border);
+}
+

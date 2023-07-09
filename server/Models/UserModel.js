@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
+import { collections } from "../Config/Collections.js";
 const userModel = mongoose.Schema(
   {
-    userName: { type: String, required: true, unique: true },
+    mobile: { type: Number, required: true, unique: true },
     password: { type: String, required: true },
   },
   {
     timestaps: true,
   }
 );
-export const User = mongoose.model("user", userModel);
+export const User = mongoose.model(collections.USER_COLLECTION, userModel);

@@ -1,20 +1,24 @@
 import mongoose from "mongoose";
+import { collections } from "../Config/Collections.js";
 const profileModal = mongoose.Schema(
   {
-    userName: { type: String, required: true, unique: true },
+    name: { type: String },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
+      ref: collections.USER_COLLECTION,
       required: true,
+      unique:true
     },
-    aleas:{type:String},
-    email:{type:String,required:true},
-    mobile:{type:Number,required:true},
-    
-    
+    aleas: { type: String },
+    email: { type: String, required: true, unique: true },
+    mobile: { type: Number, required: true, unique: true },
+    status:{type:String,default:'active'},
   },
   {
     timestaps: true,
   }
 );
-export const Profile = mongoose.model("profile", profileModal);
+export const Profile = mongoose.model(
+  collections.PROFILE_COLLECTION,
+  profileModal
+);

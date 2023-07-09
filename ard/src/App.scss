@@ -1,0 +1,23 @@
+/* The following line can be included in a src/App.scss */
+@import "~bootstrap/scss/bootstrap";
+:root {
+  --blue: #0c0792;
+  --white:#f5f5fa;
+  --border:#a9cad1;
+  --card-backGroud:rgb(9, 70, 151);
+
+}
+.page_header{
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-top: 2rem;
+}
+.thead-light > th{
+  background-color: rgb(131, 131, 131);
+  color: var(--white);
+}
+body{
+  width: 100%;
+  max-width: 100%;
+}

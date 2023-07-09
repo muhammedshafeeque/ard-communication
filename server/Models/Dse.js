@@ -18,4 +18,4 @@ const profileModal = mongoose.Schema(
     timestaps: true,
   }
 );
-export const Profile = mongoose.model("profile", profileModal);
+export const Profile = mongoose.model("profile", profileModal);  
