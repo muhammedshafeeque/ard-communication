@@ -1,8 +1,11 @@
 import React from 'react'
+import Header from '../../Components/Header/Header'
 
 function Dse() {
   return (
-    <div>Dse</div>
+    <div>
+      <Header/>
+    </div>
   )
 }
 
