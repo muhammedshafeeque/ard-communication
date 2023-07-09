@@ -20,7 +20,7 @@ function App() {
           <Route path={nav.HOME} element={<Home />} />
           <Route path={nav.ADMIN_HOME} element={<AdminHome />} />
           <Route path={nav.USERS} element={<Users />} />
-          <Route path={nav.DSC} element={<DSC />} />
+          <Route path={nav.DSE} element={<DSC />} />
         </Routes>
       </Suspense>
     </div>
