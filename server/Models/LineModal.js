@@ -4,7 +4,7 @@ const lineModel = mongoose.Schema(
   {
     name:{type:String,require:true,},
     code:{type:String,require:true,unique:true},
-    Dse:{type:mongoose.Schema.Types.ObjectId, ref:collections.DSE_COLLECTION},
+    dse:{type:mongoose.Schema.Types.ObjectId, ref:collections.DSE_COLLECTION},
     shops:[{type:mongoose.Schema.Types.ObjectId, ref:collections.SHOPS_COLLECTION}]
   },
   {

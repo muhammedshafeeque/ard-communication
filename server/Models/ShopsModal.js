@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
+import { collections } from "../Config/Collections.js";
 const ShopModel = mongoose.Schema(
   {
     name:{type:String},
-    mobile:{type:Number},
+    mobile:{type:Number,require:true},
     flexiNumber:{type:Number},
     FlexiStock:{type:Number, default:0},
     SimStock:{type:Number,default:0},
@@ -12,4 +13,4 @@ const ShopModel = mongoose.Schema(
     timestaps: true,
   }
 );
-export const RouteModal = mongoose.model("Shop", shopModel);
+export const Shope = mongoose.model(collections.SHOPS_COLLECTION, ShopModel);
