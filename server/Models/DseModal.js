@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
-const profileModal = mongoose.Schema(
+import { collections } from "../Config/Collections.js";
+const dseModal = mongoose.Schema(
   {
     mobile: { type: Number, required: true },
     stock: { type: Number, default: 0 },
     activeDse: {
-      _id: { type: mongoose.Schema.ObjectId, required: true, ref: "profile" },
+      _id: { type: mongoose.Schema.ObjectId, required: true, ref: collections.PROFILE_COLLECTION },
     },
     dses: [
       {
@@ -18,4 +19,5 @@ const profileModal = mongoose.Schema(
     timestaps: true,
   }
 );
-export const Profile = mongoose.model("profile", profileModal);  
+export const DSE = mongoose.model(collections.DSE_COLLECTION, dseModal);  
+ 
