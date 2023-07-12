@@ -1,6 +1,5 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
@@ -37,14 +36,10 @@ function CreateuserModal() {
         Create
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Create User</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form noValidate onSubmit={handleSubmit(onSubmit)}>
-            <Row className="mb-3">
-              <Form.Group as={Col} md="4" controlId="validationCustom01">
+      
+          <Form noValidate onSubmit={handleSubmit(onSubmit)} className="p-5">
+            <Row className="mb-3 col-md-12">
+              <Form.Group as={Col} md="4" className="col-md-4" controlId="validationCustom01">
                 <Form.Label>First name</Form.Label>
                 <Form.Control
                   {...register("name", { required: true })}
@@ -52,7 +47,7 @@ function CreateuserModal() {
                   placeholder="First name"
                 />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom01">
+              <Form.Group as={Col} md="4" className="col-md-4" controlId="validationCustom01">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
@@ -60,7 +55,7 @@ function CreateuserModal() {
                   placeholder="First name"
                 />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom01">
+              <Form.Group as={Col} md="4"  className="col-md-4" controlId="validationCustom01">
                 <Form.Label>Mobile</Form.Label>
                 <Form.Control
                   required
@@ -76,19 +71,21 @@ function CreateuserModal() {
                 />
               </Form.Group>
             </Row>
+            <Row className="col-md-12">
             <Button
+            className="col-md-4 float-right"
               variant="secondary"
-              style={{ width: "50%" }}
+           
               onClick={handleClose}
             >
-              Close
+              Cancel
             </Button>
-            <Button type="submit" style={{ width: "50%" }}>
+            <Button type="submit"  className="col-md-4 float-right">
               Submit
             </Button>
+            </Row>
+           
           </Form>
-        </Modal.Body>
-      </Modal>
     </>
   );
 }
