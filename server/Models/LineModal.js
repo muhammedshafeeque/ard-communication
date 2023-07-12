@@ -1,11 +1,14 @@
 import mongoose from "mongoose";
-const RouteModel = mongoose.Schema(
+import { collections } from "../Config/Collections.js";
+const lineModel = mongoose.Schema(
   {
-    name:{type:String},
-    shops:[{type:mongoose.Schema.Types.ObjectId,ref:'Shops'}]
+    name:{type:String,require:true,},
+    code:{type:String,require:true,unique:true},
+    Dse:{type:mongoose.Schema.Types.ObjectId, ref:collections.DSE_COLLECTION},
+    shops:[{type:mongoose.Schema.Types.ObjectId, ref:collections.SHOPS_COLLECTION}]
   },
   {
     timestaps: true,
   }
 );
-export const RouteModal = mongoose.model("Route", userModel);
+export const Line = mongoose.model(collections.LINE_COLLECTION, lineModel);
