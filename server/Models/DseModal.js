@@ -5,14 +5,14 @@ const dseModal = mongoose.Schema(
     mobile: { type: Number, required: true,unique:true },
     stock: { type: Number, default: 0 },
     activeUser: {
-      id: { type: mongoose.Schema.ObjectId, required: true, ref: collections.PROFILE_COLLECTION },
-      startsFrom:{type:Date}
+      user: { type: mongoose.Schema.ObjectId,  ref: collections.PROFILE_COLLECTION },
+      startsFrom:{type:String}
     },
     userHistory: [
       {
-        _id: { type: mongoose.Schema.ObjectId, required: true },
-        startDate: { type: Date ,required:true},
-        End:{type:Date}
+        user: { type: mongoose.Schema.ObjectId ,ref: collections.PROFILE_COLLECTION},
+        startDate: { type: String },
+        End:{type:String}
       },
     ],
   },
