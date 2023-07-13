@@ -1,4 +1,5 @@
 
+import { DSE } from "../Models/DseModal.js";
 import { Line } from "../Models/LineModal.js";
 
 export const lineSearch = async (query) => {
@@ -22,7 +23,20 @@ export const lineSearch = async (query) => {
 
       return lines
   } catch (error) {
-    console.log(error)
     throw error;
   }
 };
+export const dseSearch=async(query)=>{
+  try {
+    let keywords = {};
+    query.mobile&&(keywords.mobile=query.mobile)
+    let dses=await DSE.find(keywords)
+    .populate('activeUser.user')
+    .populate('userHistory.user')
+    .limit(query.limit ? parseInt(query.limit) : 10)
+      .skip(query.offset ? parseInt(query.offset) : 0);
+      return dses
+  } catch (error) {
+    throw error
+  }
+}
