@@ -7,7 +7,9 @@ const ShopModel = mongoose.Schema(
     flexiNumber:{type:Number},
     FlexiStock:{type:Number, default:0},
     SimStock:{type:Number,default:0},
-    pendingPayments:{type:Number}
+    pendingPayments:{type:Number},
+    contactPerson:{type:String},
+    balance:{type:String}
   },
   {
     timestaps: true,
