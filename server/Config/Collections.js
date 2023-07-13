@@ -9,5 +9,4 @@ export const collections={
     DSE_STOCK_COLLECTION:'dse_stock',
     SALES_CLOSS_COLLECTION:'sales_closs',
     DSE_PAY_COLLECTION:'dse_pay'
-
 }
