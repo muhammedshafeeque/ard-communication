@@ -29,8 +29,8 @@ export const shopToLineMapping = async (req, res, next) => {
 };
 export const dseLineMapping = async (req, res, next) => {
   try {
-    let dse=DSE.findById(req.params.id)
-    if(!dse)next({status:400,message:'Dse Note Found'})
+    let dse = DSE.findById(req.params.id);
+    if (!dse) next({ status: 400, message: "Dse Note Found" });
     await DSE.findByIdAndUpdate(req.params.id, {
       $addToSet: { lines: req.body.lineId },
     });
@@ -55,7 +55,7 @@ export const userDsemapping = async (req, res, next) => {
         },
       },
     });
-    res.send('user mapped to dse')
+    res.send("user mapped to dse");
   } catch (error) {
     next(error);
   }
