@@ -45,20 +45,20 @@ export const shopSearch = async (query) => {
     let keywords = {};
     query.nameContains &&
       (keywords = {
-        $or: [{ contactPerson: { $regex: query.query, $options: "i" } }],
+        $or: [{ name: { $regex: query.query, $options: "i" } }],
       });
     query.contactPersonContains &&
       (keywords = {
-        $or: [{ name: { $regex: query.query, $options: "i" } }],
+        $or: [{ contactPerson: { $regex: query.query, $options: "i" } }],
       });
     query.mobile && (keywords.mobile = query.mobile);
     query.name && (keywords.name = query.name);
-    query.mobile && (keywords.mobile = query.mobile);
+    query.flexiNumber && (keywords.flexiNumber = query.flexiNumber);
     let shops = await Shope.find(keywords)
       .limit(query.limit ? parseInt(query.limit) : 10)
       .skip(query.offset ? parseInt(query.offset) : 0);
     return shops;
   } catch (error) {
-    throw error;
+    throw error; 
   }
 };
