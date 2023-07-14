@@ -5,6 +5,7 @@ import { Stor } from "./Context/Store";
 import BlockUi from "./Components/BlockUi/BlockUi";
 import Login from "./Pages/Login/Login";
 import { nav } from "./Constants/routes";
+import Line from "./Pages/Line/Line";
 function App() {
   const { blockUi } = Stor();
   const Home = React.lazy(() => import("./Pages/Home/Home"));
@@ -21,6 +22,7 @@ function App() {
           <Route path={nav.ADMIN_HOME} element={<AdminHome />} />
           <Route path={nav.USERS} element={<Users />} />
           <Route path={nav.DSE} element={<DSC />} />
+          <Route path={nav.LINE} element={<Line />} />
         </Routes>
       </Suspense>
     </div>
