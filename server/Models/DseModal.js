@@ -15,6 +15,7 @@ const dseModal = mongoose.Schema(
         End:{type:String}
       },
     ],
+    lines:[{type:mongoose.Schema.Types.ObjectId,ref:collections.LINE_COLLECTION}]
   },
   {
     timestaps: true,

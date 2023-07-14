@@ -54,7 +54,7 @@ export const createDse = async (req, res, next) => {
       user = await Profile.findById(req.body.activeUser);
       if (!user) next({ status: 400, message: "user Not exist" });
       body = {
-        mobile: mobile,
+        mobile: req.body.mobile,
         stock: req.body.stock ? req.body.stock : 0,
         activeUser: {
           user: user._id,
