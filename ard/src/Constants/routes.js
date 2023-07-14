@@ -3,7 +3,8 @@ export const nav = {
   LOGIN: "/",
   ADMIN_HOME:"/admin_home",
   USERS:"/users",
-  DSE:'/dse'
+  DSE:'/dse',
+  LINE: "/line"
 };
 
 
