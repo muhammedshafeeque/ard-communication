@@ -12,3 +12,13 @@ export const dseValidation = {
     activeUser: Joi.string(),
   }),
 };
+export const shopValidation={
+  body:Joi.object().keys({
+    mobile:Joi.number().required(),
+    name:Joi.string().required(),
+    flexiNumber:Joi.number().required(),
+    outStandigs:Joi.number(),
+    contactPerson:Joi.string()
+
+  })
+}

@@ -1,10 +1,15 @@
 import { Line } from "../Models/LineModal.js";
-import { dseSearch, lineSearch } from "../Service/searchSearch.service.js";
+import {
+  dseSearch,
+  lineSearch,
+  shopSearch,
+} from "../Service/searchSearch.service.js";
 import { Profile } from "../Models/ProfileModal.js";
 import { Shope } from "../Models/ShopsModal.js";
 import { DSE } from "../Models/DseModal.js";
 import moment from "moment";
 import { DATE_FORMATE } from "../Config/Constant.js";
+import { checkNumberExist } from "../Service/commonDbVaue.service.js";
 export const createLine = async (req, res, next) => {
   try {
     let line = await Line.findOne({ code: req.body.code });
@@ -43,15 +48,7 @@ export const deleteLine = async (req, res) => {
 };
 export const createDse = async (req, res, next) => {
   try {
-    let { mobile } = req.body;
-    let user = await Profile.findOne({ mobile: mobile });
-    if (user) next({ status: 400, message: "mobile Number  allready exist" });
-    let shop = await Shope.findOne({ mobile: mobile });
-    if (shop) next({ status: 400, message: "mobile Number  allready exist" });
-    shop = await Shope.findOne({ flexiNumber: mobile });
-    if (shop) next({ status: 400, message: "mobile Number  allready exist" });
-    let dse = await DSE.findOne({ mobile: mobile });
-    if (dse) next({ status: 400, message: "mobile Number  allready exist" });
+    let user = await checkNumberExist(req.body.mobile);
     let body;
     if (req.body.activeUser) {
       user = await Profile.findById(req.body.activeUser);
@@ -64,7 +61,10 @@ export const createDse = async (req, res, next) => {
           startsFrom: moment(new Date()).format(DATE_FORMATE),
         },
         userHistory: [
-          { user: user._id, startDate: moment(new Date()).format(DATE_FORMATE) },
+          {
+            user: user._id,
+            startDate: moment(new Date()).format(DATE_FORMATE),
+          },
         ],
       };
     } else {
@@ -76,11 +76,57 @@ export const createDse = async (req, res, next) => {
     next(error);
   }
 };
-export const getDses=async(req,res)=>{
+export const getDses = async (req, res, next) => {
   try {
-    let dses=await dseSearch(req.query)
-    res.send(dses)
+    let dses = await dseSearch(req.query);
+    res.send(dses);
   } catch (error) {
-    next(error)
+    next(error);
   }
-}
+};
+export const createShop = async (req, res, next) => {
+  try {
+    await checkNumberExist(req.body.mobile);
+    await checkNumberExist(req.body.flexiNumber);
+    await Shope.create(req.body);
+    res.send("shop crated Successfully");
+  } catch (error) {
+    next(error);
+  }
+};
+export const updateShop = async (req, res, next) => {
+  try {
+    await Shope.findByIdAndUpdate(req.params.id, req.body);
+    res.send("shop updated successfully");
+  } catch (error) {
+    next(error);
+  }
+};
+export const getShops = async (req, res, next) => {
+  try {
+    let shops = await shopSearch(req.query);
+    res.send(shops);
+  } catch (error) {
+    next(error);
+  }
+};
+export const removeShop = async (req, res, next) => {
+  try {
+    let shop = await Shope.findById(req.params.id);
+    if (!shop) {
+      next({ status: 400, message: "shop not found" });
+    } else {
+      if (shop.outstandings > 0) {
+        next({
+          status: 400,
+          message: "shope has Outstanding Balence , please clear all balances",
+        });
+      } else {
+        await Shope.findByIdAndRemove(req.params.id);
+        res.send("Shop Removed Successfully");
+      }
+    }
+  } catch (error) {
+    next(error);
+  }
+};

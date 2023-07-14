@@ -1,6 +1,6 @@
-
 import { DSE } from "../Models/DseModal.js";
 import { Line } from "../Models/LineModal.js";
+import { Shope } from "../Models/ShopsModal.js";
 
 export const lineSearch = async (query) => {
   try {
@@ -16,27 +16,49 @@ export const lineSearch = async (query) => {
     query.code && (keywords.code = query.code);
 
     let lines = await Line.find(keywords)
-      .populate('dse')
-    //   .populate('shops')
+      .populate("dse")
+        .populate('shops')
       .limit(query.limit ? parseInt(query.limit) : 10)
       .skip(query.offset ? parseInt(query.offset) : 0);
 
-      return lines
+    return lines;
   } catch (error) {
     throw error;
   }
 };
-export const dseSearch=async(query)=>{
+export const dseSearch = async (query) => {
   try {
     let keywords = {};
-    query.mobile&&(keywords.mobile=query.mobile)
-    let dses=await DSE.find(keywords)
-    .populate('activeUser.user')
-    .populate('userHistory.user')
-    .limit(query.limit ? parseInt(query.limit) : 10)
+    query.mobile && (keywords.mobile = query.mobile);
+    let dses = await DSE.find(keywords)
+      .populate("activeUser.user")
+      .populate("userHistory.user")
+      .limit(query.limit ? parseInt(query.limit) : 10)
       .skip(query.offset ? parseInt(query.offset) : 0);
-      return dses
+    return dses;
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};
+export const shopSearch = async (query) => {
+  try {
+    let keywords = {};
+    query.nameContains &&
+      (keywords = {
+        $or: [{ contactPerson: { $regex: query.query, $options: "i" } }],
+      });
+    query.contactPersonContains &&
+      (keywords = {
+        $or: [{ name: { $regex: query.query, $options: "i" } }],
+      });
+    query.mobile && (keywords.mobile = query.mobile);
+    query.name && (keywords.name = query.name);
+    query.mobile && (keywords.mobile = query.mobile);
+    let shops = await Shope.find(keywords)
+      .limit(query.limit ? parseInt(query.limit) : 10)
+      .skip(query.offset ? parseInt(query.offset) : 0);
+    return shops;
+  } catch (error) {
+    throw error;
+  }
+};
