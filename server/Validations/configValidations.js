@@ -22,3 +22,13 @@ export const shopValidation={
 
   })
 }
+export const mapLineToDseValidation={
+  body:Joi.object().keys({
+    lineId:Joi.string().required()
+  })
+}
+export const mapUserToDseValidation={
+  body:Joi.object().keys({
+    userId:Joi.string().required()
+  })
+}
