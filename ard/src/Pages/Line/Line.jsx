@@ -15,6 +15,7 @@ function Line() {
         <div className="container">
           <Container>
             <Row>
+              <h2 >Create Line</h2>
               <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Row className="mt-5">
