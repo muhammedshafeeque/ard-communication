@@ -8,6 +8,11 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
+
+        h2{
+            margin-top: 20px;
+            color: rgb(95, 56, 56);
+        }
         label {
 			font-size: 1rem;
 			text-transform: uppercase;
@@ -19,7 +24,7 @@
 			}
         }
         input {
-			padding: 1rem;
+			padding: 10px;
             cursor: pointer;
 			// outline: none;
 			font-size: 1.4rem;

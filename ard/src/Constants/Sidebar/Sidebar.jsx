@@ -11,5 +11,5 @@ export const AdminSideBar = [
   { name: "Home", nav: nav.HOME, icon: AiOutlineHome },
   { name: "Users", nav: nav.USERS, icon: FiUsers },
   { name: "DSE", nav: nav.DSE, icon: BiSolidPurchaseTag },
-  { name: "LINE", nav: nav.LINE, icon: BiAddToQueue },
+  { name: "LISTLINK", nav: nav.LISTLINK, icon: BiAddToQueue },
 ];
