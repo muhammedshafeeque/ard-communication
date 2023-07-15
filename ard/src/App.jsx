@@ -25,8 +25,8 @@ function App() {
           <Route path={nav.ADMIN_HOME} element={<AdminHome />} />
           <Route path={nav.USERS} element={<Users />} />
           <Route path={nav.DSE} element={<DSC />} />
-          <Route path={nav.LINE} element={<Line />} />
-          <Route path={nav.LISTLINK} element={<ListLine/>}/>
+          <Route path={nav.CREATE_LINE} element={<Line />} />
+          <Route path={nav.LINES} element={<ListLine />} />
         </Routes>
       </Suspense>
     </div>

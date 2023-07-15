@@ -4,7 +4,7 @@ import Header from "../../Components/Header/Header";
 import { Link } from "react-router-dom";
 import {AiFillDelete} from "react-icons/ai"
 import "./listLine.scss";
-
+import {nav} from '../../Constants/routes'
 function ListLine() {
   return (
     <div>
@@ -12,7 +12,7 @@ function ListLine() {
       <Container>
         <div className="title">
           <h1>Line Lists</h1>
-          <Link to="/line">
+          <Link to={nav.CREATE_LINE}>
             <Button className="btn-lg float-right">Create Line</Button>
           </Link>
         </div>
