@@ -5,13 +5,16 @@ import { Stor } from "./Context/Store";
 import BlockUi from "./Components/BlockUi/BlockUi";
 import Login from "./Pages/Login/Login";
 import { nav } from "./Constants/routes";
-import Line from "./Pages/Line/Line";
+
 function App() {
   const { blockUi } = Stor();
   const Home = React.lazy(() => import("./Pages/Home/Home"));
   const AdminHome = React.lazy(() => import("./Pages/AdminHome/AdminHome"));
   const Users = React.lazy(() => import("./Pages/Users/Users"));
   const DSC = React.lazy(() => import("./Pages/Dse/Dse"));
+  const Line = React.lazy(() => import("./Pages/Line/Line"));
+  const ListLine = React.lazy(() => import("./Pages/Line/ListLine"));
+
   return (
     <div className="App">
       <BlockUi block={blockUi} />
@@ -23,6 +26,7 @@ function App() {
           <Route path={nav.USERS} element={<Users />} />
           <Route path={nav.DSE} element={<DSC />} />
           <Route path={nav.LINE} element={<Line />} />
+          <Route path={nav.LISTLINK} element={<ListLine/>}/>
         </Routes>
       </Suspense>
     </div>
