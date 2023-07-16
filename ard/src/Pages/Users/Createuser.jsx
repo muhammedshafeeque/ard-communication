@@ -10,6 +10,7 @@ import { useAlert } from "react-alert";
 
 import { useNavigate } from "react-router-dom";
 import { nav } from "../../Constants/routes";
+
 function Createuser() {
   const { register, handleSubmit } = useForm();
   const { setBlockUi } = Stor();
