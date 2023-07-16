@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../Components/Header/Header";
+
 import { Button, Row, Table } from "react-bootstrap";
 import axios from "../../Api/Axios";
 import { useNavigate } from "react-router-dom";
@@ -25,7 +25,6 @@ function Users() {
 
   return (
     <div>
-      <Header />
       <div className="container">
         <h5 style={{ textAlign: "center" }} className="mt-2">
           Users

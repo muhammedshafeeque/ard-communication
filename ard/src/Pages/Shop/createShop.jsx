@@ -1,37 +1,16 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/esm/Button";
 import { useForm } from "react-hook-form";
-import { Stor } from "../../Context/Store";
-import axios from "../../Api/Axios";
-import { useAlert } from "react-alert";
-
 import { useNavigate } from "react-router-dom";
 import { nav } from "../../Constants/routes";
+import { Col, Form, Row } from "react-bootstrap";
 
-function Createuser() {
+function CreateShop() {
   const { register, handleSubmit } = useForm();
-  const { setBlockUi } = Stor();
-  const alert = useAlert();
   const navigate = useNavigate();
-  const onSubmit = (data) => {
-    setBlockUi(true);
-    axios
-      .post("admin/create-user", data)
-      .then((res) => {
-        setBlockUi(false);
-        alert.success(res.data.message);
-      })
-      .catch((err) => {
-        setBlockUi(false);
-        alert.error(err.response.data.message);
-      });
-  };
+  const onSubmit = (data) => {};
   return (
-    <>
-
+    <div>
       <div className="container">
         <h4 style={{ textAlign: "center" }}>Create user</h4>
         <Form noValidate onSubmit={handleSubmit(onSubmit)}>
@@ -68,23 +47,26 @@ function Createuser() {
               />
             </Form.Group>
           </Row>
-          <Button
+          <div className="col-md-12 submit-area" style={{}}>
+
+            <Button
             variant="secondary"
-            style={{ width: "50%" }}
+            className="mr-3"
             onClick={(e) => {
               e.preventDefault();
               navigate(nav.USERS);
             }}
-          >
+          > 
             Cancel
           </Button>
-          <Button type="submit" style={{ width: "50%" }}>
-            Submit
-          </Button>
+          <Button type="submit" className="ml-3"> Submit</Button>
+
+          </div>
+          
         </Form>
       </div>
-    </>
+    </div>
   );
 }
 
-export default Createuser;
+export default CreateShop;
