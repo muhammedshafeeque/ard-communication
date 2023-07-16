@@ -11,14 +11,15 @@ import moment from "moment";
 import { DATE_FORMATE } from "../Config/Constant.js";
 import { checkNumberExist } from "../Service/commonDbVaue.service.js";
 export const createLine = async (req, res, next) => {
+  let {code}=req.body
   try {
-    let line = await Line.findOne({ code: req.body.code });
-    if (line) {next({ status: 400, message: "Line Already Exist" })}
-    else{
+    let line = await Line.findOne({ code: code });
+    if (line) {
+      next({ status: 400, message: "Line Already Exist" });
+    } else {
       line = await Line.create(req.body);
       res.send("line Created Successfully");
     }
-
   } catch (error) {
     next(error);
   }
