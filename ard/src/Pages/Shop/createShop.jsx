@@ -29,7 +29,6 @@ function CreateShop() {
                 type="number"
                 {...register("mobile", {
                   required: false,
-                  required: true,
                   minLength: 10,
                   maxLength: 10,
                 })}
@@ -59,6 +58,14 @@ function CreateShop() {
                 placeholder="Contact Person"
               />
             </Form.Group>
+            <Form.Group as={Col} md="4" controlId="validationCustom01">
+              <Form.Label className="required">OutStandigs</Form.Label>
+              <Form.Control
+                {...register("outstanding", { required: true })}
+                type="number"
+                placeholder="OutStanding"
+              />
+            </Form.Group>
           </Row>
           <div className="col-md-12 submit-area" style={{}}>
             <Button
@@ -66,7 +73,7 @@ function CreateShop() {
               className="mr-3"
               onClick={(e) => {
                 e.preventDefault();
-                navigate(nav.USERS);
+                navigate(nav.SHOPS);
               }}
             >
               Cancel
