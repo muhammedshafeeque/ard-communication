@@ -4,7 +4,8 @@ function BlockUi({ block }) {
   if (!block) {
     return "";
   } else {
-    return <div className="block-ui-container">
+    return (
+      <div className="block-ui-container">
         <div className="block-ui-overlay" />
         <div className="block-ui-message-container">
           <div className="block-ui-message">
@@ -16,7 +17,8 @@ function BlockUi({ block }) {
             </div>
           </div>
         </div>
-      </div>;
+      </div>
+    );
   }
 }
 
