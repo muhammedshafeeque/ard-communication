@@ -1,62 +1,38 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
-import { PiTreeEvergreenFill } from "react-icons/pi";
-import { PiTreeEvergreenLight } from "react-icons/pi";
 import Button from "react-bootstrap/Button";
-import { useState } from "react";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import ToggleButton from "react-bootstrap/ToggleButton";
 import "./Dse.scss";
 import { useNavigate } from "react-router-dom";
 import { nav } from "../../Constants/routes";
 
 function Dse() {
-  const [radioValue, setRadioValue] = useState("1");
-  const  navigate=useNavigate()
-  const radios = [
-    { name: "Not Active", value: "1" },
-    { name: "Active", value: "2" },
-  ];
+  const navigate = useNavigate();
+
   return (
     <div>
- 
       <Container>
-         <div className="col-md-12 bg-light text-right">
+        <div className="col-md-12  text-right">
+          <Button
+            className="offset-10 mt-4 "
+            onClick={(e) => {
+              e.preventDefault();
+              navigate(nav.CREATE_DSE);
+            }}
+            variant="success"
+          >
+            Create DSC
+          </Button>
 
-        <Button   className="offset-10 mt-3 " onClick={(e)=>{
-          e.preventDefault()
-          navigate(nav.CREATE_DSE)
-        }} variant="success">
-          Create DSC
-        </Button>
-         </div>
-
-        <h2 style={{ color: "lightblue", marginTop: 6 }}>Dse List</h2>
+          <h2 style={{ color: "lightblue", marginTop: -45 }}>Dse List</h2>
+        </div>
         <Table striped bordered hover responsive className="mt-4">
           <thead>
             <tr>
               <th>N0</th>
               <th> MOBILE NO</th>
               <th>STOCK</th>
-              <th>
-                <ButtonGroup>
-                  {radios.map((radio, idx) => (
-                    <ToggleButton
-                      key={idx}
-                      id={`radio-${idx}`}
-                      type="radio"
-                      variant={idx % 2 ? "outline-success" : "outline-danger"}
-                      name="radio"
-                      value={radio.value}
-                      checked={radioValue === radio.value}
-                      onChange={(e) => setRadioValue(e.currentTarget.value)}
-                    >
-                      {radio.name}
-                    </ToggleButton>
-                  ))}
-                </ButtonGroup>
-              </th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -65,7 +41,7 @@ function Dse() {
               <td>9656757977</td>
               <td>4</td>
               <td>
-                <PiTreeEvergreenFill />
+                <button className="greenBtn">Yes</button>
               </td>
             </tr>
             <tr>
@@ -73,7 +49,7 @@ function Dse() {
               <td>9744433064</td>
               <td>3</td>
               <td>
-                <PiTreeEvergreenFill />
+                <button className="greenBtn">Yes</button>
               </td>
             </tr>
             <tr>
@@ -81,7 +57,7 @@ function Dse() {
               <td>7649434064</td>
               <td>0</td>
               <td>
-                <PiTreeEvergreenLight />
+                <button className="redBtn">No</button>
               </td>
             </tr>
             <tr>
@@ -89,7 +65,7 @@ function Dse() {
               <td>6749439364</td>
               <td>0</td>
               <td>
-                <PiTreeEvergreenLight />
+                <button className="redBtn">No</button>
               </td>
             </tr>
           </tbody>
