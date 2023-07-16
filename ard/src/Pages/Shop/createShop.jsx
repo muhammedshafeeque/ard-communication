@@ -56,7 +56,7 @@ function CreateShop() {
               e.preventDefault();
               navigate(nav.USERS);
             }}
-          >
+          > 
             Cancel
           </Button>
           <Button type="submit" className="ml-3"> Submit</Button>
