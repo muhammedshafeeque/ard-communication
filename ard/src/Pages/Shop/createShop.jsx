@@ -16,53 +16,66 @@ function CreateShop() {
         <Form noValidate onSubmit={handleSubmit(onSubmit)}>
           <Row className="mb-3">
             <Form.Group as={Col} md="4" controlId="validationCustom01">
-              <Form.Label>First name</Form.Label>
+              <Form.Label>Name</Form.Label>
               <Form.Control
                 {...register("name", { required: true })}
                 type="text"
-                placeholder="First name"
-              />
-            </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationCustom01">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                {...register("email", { required: false })}
-                placeholder="First name"
+                placeholder="name"
               />
             </Form.Group>
             <Form.Group as={Col} md="4" controlId="validationCustom01">
               <Form.Label>Mobile</Form.Label>
               <Form.Control
-                required
                 type="number"
                 {...register("mobile", {
+                  required: false,
+                  required: true,
+                  minLength: 10,
+                  maxLength: 10,
+                })}
+                placeholder="mobile"
+              />
+            </Form.Group>
+            <Form.Group as={Col} md="4" controlId="validationCustom01">
+              <Form.Label>Flexi Number</Form.Label>
+              <Form.Control
+                required
+                type="mobile"
+                {...register("flexiNumber", {
                   required: true,
                   minLength: 10,
                   maxLength: 10,
                 })}
                 minLength={9}
                 maxLength={10}
-                placeholder="First name"
+                placeholder="Flexi Number"
+              />
+            </Form.Group>
+            <Form.Group as={Col} md="4" controlId="validationCustom01">
+              <Form.Label className="required">Contact Person</Form.Label>
+              <Form.Control
+                {...register("contactPerson", { required: true })}
+                type="text"
+                placeholder="Contact Person"
               />
             </Form.Group>
           </Row>
           <div className="col-md-12 submit-area" style={{}}>
-
             <Button
-            variant="secondary"
-            className="mr-3"
-            onClick={(e) => {
-              e.preventDefault();
-              navigate(nav.USERS);
-            }}
-          > 
-            Cancel
-          </Button>
-          <Button type="submit" className="ml-3"> Submit</Button>
-
+              variant="secondary"
+              className="mr-3"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate(nav.USERS);
+              }}
+            >
+              Cancel
+            </Button>
+            <Button type="submit" className="ml-3">
+              {" "}
+              Submit
+            </Button>
           </div>
-          
         </Form>
       </div>
     </div>

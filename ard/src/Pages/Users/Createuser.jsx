@@ -30,7 +30,6 @@ function Createuser() {
   };
   return (
     <>
-
       <div className="container">
         <h4 style={{ textAlign: "center" }}>Create user</h4>
         <Form noValidate onSubmit={handleSubmit(onSubmit)}>
