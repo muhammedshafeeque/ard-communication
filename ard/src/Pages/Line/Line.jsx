@@ -8,6 +8,7 @@ import { BiLogInCircle } from "react-icons/bi";
 import "./line.scss";
 
 function Line() {
+ 
   return (
     <>
       <Header />
