@@ -1,5 +1,5 @@
 import { nav } from "../routes";
-import { AiOutlineHome } from "react-icons/ai";
+import { AiOutlineHome ,AiFillShop} from "react-icons/ai";
 import { FiUsers } from "react-icons/fi";
 import { BiSolidPurchaseTag } from "react-icons/bi";
 import { BiAddToQueue } from "react-icons/bi";
@@ -12,4 +12,5 @@ export const AdminSideBar = [
   { name: "Users", nav: nav.USERS, icon: FiUsers },
   { name: "DSE", nav: nav.DSE, icon: BiSolidPurchaseTag },
   { name: "Line", nav: nav.LINES, icon: BiAddToQueue },
+  {name:'Shops', nav:nav.SHOPS, icon: AiFillShop}
 ];

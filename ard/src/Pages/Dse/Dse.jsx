@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "../../Components/Header/Header";
 import { Container } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import { PiTreeEvergreenFill } from "react-icons/pi";
@@ -21,7 +20,7 @@ function Dse() {
   ];
   return (
     <div>
-      <Header />
+ 
       <Container>
          <div className="col-md-12 bg-light text-right">
 

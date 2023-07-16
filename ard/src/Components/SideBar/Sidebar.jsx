@@ -54,7 +54,7 @@ function Sidebar() {
             onClick={(e) => {
               e.preventDefault();
               localStorage.clear();
-              navigate(nav.LOGIN);
+              window.location.href = nav.LOGIN;
             }}
           >
             <RiLogoutBoxRLine /> Logout

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
-import Header from "../../Components/Header/Header";
 import { Link } from "react-router-dom";
 import { AiFillDelete } from "react-icons/ai";
 import "./listLine.scss";
@@ -29,7 +28,7 @@ function ListLine() {
   }, [alert,setBlockUi]);
   return (
     <div>
-      <Header />
+
       <Container>
         <div className="title">
           <h1>Line Lists</h1>
