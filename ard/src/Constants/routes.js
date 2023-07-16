@@ -8,5 +8,6 @@ export const nav = {
   CREATE_LINE: "/create-line",
   CREATE_USER:'/create-user',
   CREATE_DSE:'/create-dse',
-  SHOPS:'/shops'
+  SHOPS:'/shops',
+  CREATE_SHOP:'/create-shop'
 };

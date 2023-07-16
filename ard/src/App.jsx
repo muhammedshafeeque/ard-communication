@@ -18,6 +18,7 @@ function App() {
   const CreateUser = React.lazy(() => import("./Pages/Users/Createuser"));
   const CreateDse=React.lazy(()=>import("./Pages/Dse/CreateDse"))
   const Shops=React.lazy(()=>import('./Pages/Shop/Shops'))
+  const CreateShop=React.lazy(()=>import('./Pages/Shop/createShop'))
   return (
     <div className="App">
       {user&& <Header/>}
@@ -35,6 +36,7 @@ function App() {
           <Route path={nav.CREATE_USER} element={<CreateUser />} />
           <Route path={nav.CREATE_DSE} element={<CreateDse/>}/>
           <Route path={nav.SHOPS} element={<Shops/>}/>
+          <Route path={nav.CREATE_SHOP} element={<CreateShop/>}/>
         </Routes>
       </Suspense>
     </div>
