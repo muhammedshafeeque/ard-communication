@@ -7,5 +7,6 @@ export const nav = {
   LINES: "/lines",
   CREATE_LINE: "/create-line",
   CREATE_USER:'/create-user',
-  CREATE_DSE:'/create-dse'
+  CREATE_DSE:'/create-dse',
+  SHOPS:'/shops'
 };

@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { Stor } from "../../Context/Store";
 import axios from "../../Api/Axios";
 import { useAlert } from "react-alert";
-import Header from "../../Components/Header/Header";
+
 import { useNavigate } from "react-router-dom";
 import { nav } from "../../Constants/routes";
 function Createuser() {
@@ -30,7 +30,7 @@ function Createuser() {
   };
   return (
     <>
-      <Header />
+
       <div className="container">
         <h4 style={{ textAlign: "center" }}>Create user</h4>
         <Form noValidate onSubmit={handleSubmit(onSubmit)}>
