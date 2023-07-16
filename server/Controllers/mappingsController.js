@@ -11,18 +11,41 @@ export const shopToLineMapping = async (req, res, next) => {
     if (!req.body.length) next({ status: 400, message: "shpops are empty" });
     let line = await Line.findById(req.params.id);
     if (!line) next({ status: 400, message: "line Note Found" });
-    await req.body.forEach(async (element) => {
-      let shop = await Shope.findById(element);
-      if (shop) shopArray.push(element);
-      else next({ status: 400, message: "some Shops note fount" });
+    let updates = new Promise((resolve, reject) => {
+      req.body.forEach(async (element, index, array) => {
+        let shop = await Shope.findById(element);
+        if (shop) {
+          if (shop.line) {
+            await Line.findByIdAndUpdate(shop.line, {
+              $pull: { shops: element },
+            });
+          }
+          await Shope.findByIdAndUpdate(element, {
+            $set: {
+              line: line._id,
+            },
+          });
+          shopArray.push(element);
+        } else {
+          reject({ status: 400, message: "some Shops note fount" });
+        }
+        if (index === array.length - 1) resolve();
+      });
     });
-    await req.body.forEach((str) => {
-      shopArray.push(new mongoose.Types.ObjectId(str));
-    });
-    await Line.findByIdAndUpdate(req.params.id, {
-      $addToSet: { shops: { $each: shopArray } },
-    });
-    res.send("Shops mapped Successfully");
+    updates
+      .then(async () => {
+        await req.body.forEach((str) => {
+          shopArray.push(new mongoose.Types.ObjectId(str));
+        });
+        await Line.findByIdAndUpdate(req.params.id, {
+          $addToSet: { shops: { $each: shopArray } },
+        });
+
+        res.send("Shops mapped Successfully");
+      })
+      .catch((err) => {
+        next(err);
+      });
   } catch (error) {
     next(error);
   }

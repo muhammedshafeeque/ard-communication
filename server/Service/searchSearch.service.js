@@ -17,7 +17,7 @@ export const lineSearch = async (query) => {
 
     let lines = await Line.find(keywords)
       .populate("dse")
-        .populate('shops')
+      .populate("shops")
       .limit(query.limit ? parseInt(query.limit) : 10)
       .skip(query.offset ? parseInt(query.offset) : 0);
 
@@ -51,6 +51,7 @@ export const shopSearch = async (query) => {
       (keywords = {
         $or: [{ contactPerson: { $regex: query.query, $options: "i" } }],
       });
+    query.line && (keywords.line = query.line);
     query.mobile && (keywords.mobile = query.mobile);
     query.name && (keywords.name = query.name);
     query.flexiNumber && (keywords.flexiNumber = query.flexiNumber);
@@ -59,6 +60,6 @@ export const shopSearch = async (query) => {
       .skip(query.offset ? parseInt(query.offset) : 0);
     return shops;
   } catch (error) {
-    throw error; 
+    throw error;
   }
 };
