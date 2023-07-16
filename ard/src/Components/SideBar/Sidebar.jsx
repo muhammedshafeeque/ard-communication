@@ -29,7 +29,7 @@ function Sidebar() {
 
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>ARD COMMUNICATIONS</Offcanvas.Title>
+          <Offcanvas.Title style={{cursor:'pointer'}}>ARD COMMUNICATIONS</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           {sideBar.map((item, i) => {
