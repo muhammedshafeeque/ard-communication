@@ -30,8 +30,8 @@ function Users() {
         <h5 style={{ textAlign: "center" }} className="mt-2">
           Users
         </h5>
-        <Row className="col-md-12" >
-          <div  className=" col-md-2" style={{display:"flex",justifyContent:'flex-end'}}>
+        <Row className="col-md-12 mt-5" >
+          <div  className=" col-md-12" style={{display:"flex",justifyContent:'flex-end'}}>
             <Button onClick={(e)=>{
               e.preventDefault()
               navigate(nav.CREATE_USER)
@@ -39,7 +39,7 @@ function Users() {
           </div>
         </Row>
 
-        <Table>
+        <Table >
           <thead>
             <tr>
               <th>Name</th>

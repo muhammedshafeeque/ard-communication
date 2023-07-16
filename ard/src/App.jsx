@@ -15,7 +15,7 @@ function App() {
   const Line = React.lazy(() => import("./Pages/Line/Line"));
   const ListLine = React.lazy(() => import("./Pages/Line/ListLine"));
   const CreateUser = React.lazy(() => import("./Pages/Users/Createuser"));
-
+  const CreateDse=React.lazy(()=>import("./Pages/Dse/CreateDse"))
   return (
     <div className="App">
       <BlockUi block={blockUi} />
@@ -29,6 +29,7 @@ function App() {
           <Route path={nav.CREATE_LINE} element={<Line />} />
           <Route path={nav.LINES} element={<ListLine />} />
           <Route path={nav.CREATE_USER} element={<CreateUser />} />
+          <Route path={nav.CREATE_DSE} element={<CreateDse/>}/>
         </Routes>
       </Suspense>
     </div>

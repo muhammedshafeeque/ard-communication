@@ -9,10 +9,12 @@ import { useState } from "react";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import "./Dse.scss";
+import { useNavigate } from "react-router-dom";
+import { nav } from "../../Constants/routes";
 
 function Dse() {
   const [radioValue, setRadioValue] = useState("1");
-
+  const  navigate=useNavigate()
   const radios = [
     { name: "Not Active", value: "1" },
     { name: "Active", value: "2" },
@@ -23,7 +25,10 @@ function Dse() {
       <Container>
          <div className="col-md-12 bg-light text-right">
 
-        <Button  href="/createDsc" className="offset-10 mt-3 " variant="success">
+        <Button   className="offset-10 mt-3 " onClick={(e)=>{
+          e.preventDefault()
+          navigate(nav.CREATE_DSE)
+        }} variant="success">
           Create DSC
         </Button>
          </div>
