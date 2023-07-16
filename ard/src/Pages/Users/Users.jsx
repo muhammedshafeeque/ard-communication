@@ -1,30 +1,45 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../Components/Header/Header";
-import { Row, Table } from "react-bootstrap";
-import CreateuserModal from "../../Components/CreateUserModal/CreateuserModal";
+import { Button, Row, Table } from "react-bootstrap";
 import axios from "../../Api/Axios";
+import { useNavigate } from "react-router-dom";
+import { nav } from "../../Constants/routes";
+import { Stor } from "../../Context/Store";
+import { useAlert } from "react-alert";
+
 function Users() {
   const [users, setUsers] = useState([]);
+  const {setBlockUi}=Stor()
+  const navigate = useNavigate();
+  const alert=useAlert()
   useEffect(() => {
+    setBlockUi(true)
     axios.get("/user/users").then((res) => {
       setUsers(res.data);
-    });
-  }, []);
+      setBlockUi(false)
+    }).catch((err)=>{
+      setBlockUi(false)
+      alert.error(err.message)
+    })
+  }, [setBlockUi,alert]);
 
   return (
     <div>
       <Header />
-      <h5 style={{ textAlign: "center" }} className="mt-2">
-        Users
-      </h5>
-      <CreateuserModal />
-      <Row>
-        <Table
-          striped
-          bordered
-          hover
-          style={{ marginLeft: "15px", fontSize: "10px" }}
-        >
+      <div className="container">
+        <h5 style={{ textAlign: "center" }} className="mt-2">
+          Users
+        </h5>
+        <Row className="col-md-12" >
+          <div  className=" col-md-2" style={{display:"flex",justifyContent:'flex-end'}}>
+            <Button onClick={(e)=>{
+              e.preventDefault()
+              navigate(nav.CREATE_USER)
+            }} >Create User</Button>
+          </div>
+        </Row>
+
+        <Table>
           <thead>
             <tr>
               <th>Name</th>
@@ -33,7 +48,7 @@ function Users() {
             </tr>
           </thead>
           <tbody>
-            {users.map((item,) => {
+            {users.map((item) => {
               return (
                 <tr key={item._id}>
                   <td>{item.name}</td>
@@ -44,7 +59,7 @@ function Users() {
             })}
           </tbody>
         </Table>
-      </Row>
+      </div>
     </div>
   );
 }

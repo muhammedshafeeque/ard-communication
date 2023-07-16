@@ -7,12 +7,12 @@ const profileModal = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: collections.USER_COLLECTION,
       required: true,
-      unique:true
+      unique: true,
     },
     aleas: { type: String },
     email: { type: String, required: true, unique: true },
     mobile: { type: Number, required: true, unique: true },
-    status:{type:String,default:'active'},
+    status: { type: String, default: "active" },
   },
   {
     timestaps: true,

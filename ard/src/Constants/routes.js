@@ -4,6 +4,7 @@ export const nav = {
   ADMIN_HOME: "/admin_home",
   USERS: "/users",
   DSE: "/dse",
-  LISTLINK: "/listline",
-  LINE: "/line",
+  LINES: "/lines",
+  CREATE_LINE: "/create-line",
+  CREATE_USER:'/create-user'
 };
