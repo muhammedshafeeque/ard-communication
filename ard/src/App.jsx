@@ -14,6 +14,7 @@ function App() {
   const DSC = React.lazy(() => import("./Pages/Dse/Dse"));
   const Line = React.lazy(() => import("./Pages/Line/Line"));
   const ListLine = React.lazy(() => import("./Pages/Line/ListLine"));
+  const CreateUser = React.lazy(() => import("./Pages/Users/Createuser"));
 
   return (
     <div className="App">
@@ -27,6 +28,7 @@ function App() {
           <Route path={nav.DSE} element={<DSC />} />
           <Route path={nav.CREATE_LINE} element={<Line />} />
           <Route path={nav.LINES} element={<ListLine />} />
+          <Route path={nav.CREATE_USER} element={<CreateUser />} />
         </Routes>
       </Suspense>
     </div>
