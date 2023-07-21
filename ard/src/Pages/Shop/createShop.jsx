@@ -4,15 +4,30 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { nav } from "../../Constants/routes";
 import { Col, Form, Row } from "react-bootstrap";
-
+import axios from '../../Api/Axios'
+import { useAlert } from "react-alert";
+import { Stor } from "../../Context/Store";
 function CreateShop() {
   const { register, handleSubmit } = useForm();
+  const {setBlockUi}=Stor()
   const navigate = useNavigate();
-  const onSubmit = (data) => {};
+  const alert=useAlert()
+  const onSubmit = (data) => {
+    setBlockUi(true)
+    axios.post('config/shop',data).then((res)=>{
+      setBlockUi(false)
+      alert.success(res.data)
+      navigate(nav.SHOPS)
+    }).catch((err)=>{
+      setBlockUi(false)
+      alert.error(err.response.data.message);
+    })
+    
+  };
   return (
     <div>
       <div className="container">
-        <h4 style={{ textAlign: "center" }}>Create user</h4>
+        <h4 style={{ textAlign: "center" }}>Create Shop</h4>
         <Form noValidate onSubmit={handleSubmit(onSubmit)}>
           <Row className="mb-3">
             <Form.Group as={Col} md="4" controlId="validationCustom01">
@@ -61,7 +76,7 @@ function CreateShop() {
             <Form.Group as={Col} md="4" controlId="validationCustom01">
               <Form.Label className="required">OutStandigs</Form.Label>
               <Form.Control
-                {...register("outstanding", { required: true })}
+                {...register("outStandigs", { required: true })}
                 type="number"
                 placeholder="OutStanding"
               />
