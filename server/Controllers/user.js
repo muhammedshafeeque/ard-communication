@@ -1,5 +1,6 @@
 import { Profile } from "../Models/ProfileModal.js";
 import { User } from "../Models/UserModel.js";
+import { searchUser } from "../Service/searchSearch.service.js";
 import { encriptString } from "../Utils/utils.js";
 
 export const craeteUser = async (req, res, next) => {
@@ -23,11 +24,13 @@ export const craeteUser = async (req, res, next) => {
     next(error);
   }
 };
-export const getUsers=async(req,res,next)=>{
-    try {
-        let users=await Profile.find()
-        res.send(users)
-    } catch (error) {
-        next(error)
-    }
-}
+export const getUsers = async (req, res, next) => {
+  try {
+    let query = req.query;
+    req.user.aleas !== "admin" && (query.excludeAleas = "admin");
+    let users = await searchUser(query);
+    res.send(users);
+  } catch (error) {
+    next(error);
+  }
+};

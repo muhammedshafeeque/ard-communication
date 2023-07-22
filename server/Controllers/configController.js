@@ -72,11 +72,12 @@ export const createDse = async (req, res, next) => {
         ],
       };
     } else {
-      body = { mobile: mobile, stock: req.body.stock ? req.body.stock : 0 };
+      body = { mobile: req.body.mobile, stock: req.body.stock ? req.body.stock : 0 };
     }
     await DSE.create(body);
     res.send("dse Created Successfully");
   } catch (error) {
+    console.log(error)
     next(error);
   }
 };
