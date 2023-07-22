@@ -28,7 +28,7 @@ function CreateShop() {
     <div>
       <div className="container">
         <h4 style={{ textAlign: "center" }}>Create Shop</h4>
-        <Form noValidate onSubmit={handleSubmit(onSubmit)}>
+        <Form  onSubmit={handleSubmit(onSubmit)}>
           <Row className="mb-3">
             <Form.Group as={Col} md="4" controlId="validationCustom01">
               <Form.Label>Name</Form.Label>

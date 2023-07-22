@@ -9,5 +9,6 @@ export const nav = {
   CREATE_USER:'/create-user',
   CREATE_DSE:'/create-dse',
   SHOPS:'/shops',
-  CREATE_SHOP:'/create-shop'
+  CREATE_SHOP:'/create-shop',
+  MAPPINGS:'/mappings'
 };
