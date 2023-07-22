@@ -80,10 +80,9 @@ export const searchUser = async (query) => {
         $or: [{ name: { $regex: query.query, $options: "i" } }],
       });
     query.name && (keywords.name = query.name);
-    query.excludeAleas&&( keywords.aleas={$ne:excludeAleas})
-    query.aleas&&(keywords.aleas=query.aleas)
-   
-    
+    query.excludeAleas && (keywords.aleas = { $ne: excludeAleas });
+    query.aleas && (keywords.aleas = query.aleas);
+
     let users = await Profile.find(keywords)
       .limit(query.limit ? parseInt(query.limit) : 10)
       .skip(query.offset ? parseInt(query.offset) : 0);
