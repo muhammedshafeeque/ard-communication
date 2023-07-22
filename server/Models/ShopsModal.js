@@ -9,7 +9,6 @@ const ShopModel = mongoose.Schema(
     outstanding:{type:Number,default:0},
     contactPerson:{type:String},
     line:{type:mongoose.Schema.Types.ObjectId}
-
   },
   {
     timestaps: true,
