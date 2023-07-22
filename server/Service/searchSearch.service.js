@@ -1,6 +1,8 @@
 import { DSE } from "../Models/DseModal.js";
 import { Line } from "../Models/LineModal.js";
+import { Profile } from "../Models/ProfileModal.js";
 import { Shope } from "../Models/ShopsModal.js";
+import { User } from "../Models/UserModel.js";
 
 export const lineSearch = async (query) => {
   try {
@@ -45,11 +47,18 @@ export const shopSearch = async (query) => {
     let keywords = {};
     query.nameContains &&
       (keywords = {
-        $or: [{ name: { $regex: query.query, $options: "i" } }],
+        $or: [{ name: { $regex: query.nameContains, $options: "i" } }],
       });
     query.contactPersonContains &&
       (keywords = {
-        $or: [{ contactPerson: { $regex: query.query, $options: "i" } }],
+        $or: [
+          {
+            contactPerson: {
+              $regex: query.contactPersonContains,
+              $options: "i",
+            },
+          },
+        ],
       });
     query.line && (keywords.line = query.line);
     query.mobile && (keywords.mobile = query.mobile);
@@ -59,6 +68,26 @@ export const shopSearch = async (query) => {
       .limit(query.limit ? parseInt(query.limit) : 10)
       .skip(query.offset ? parseInt(query.offset) : 0);
     return shops;
+  } catch (error) {
+    throw error;
+  }
+};
+export const searchUser = async (query) => {
+  try {
+    let keywords = {};
+    query.query &&
+      (keywords = {
+        $or: [{ name: { $regex: query.query, $options: "i" } }],
+      });
+    query.name && (keywords.name = query.name);
+    query.excludeAleas&&( keywords.aleas={$ne:excludeAleas})
+    query.aleas&&(keywords.aleas=query.aleas)
+   
+    
+    let users = await Profile.find(keywords)
+      .limit(query.limit ? parseInt(query.limit) : 10)
+      .skip(query.offset ? parseInt(query.offset) : 0);
+    return users;
   } catch (error) {
     throw error;
   }
