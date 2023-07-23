@@ -7,12 +7,14 @@ import { useAlert } from "react-alert";
 import { useForm } from "react-hook-form";
 import axios from "../../Api/Axios";
 import { nav } from "../../Constants/routes";
+
 import "./createDsc.scss";
 
 function CreateDse() {
   const { setBlockUi } = Stor();
   const alert = useAlert();
   const { register, handleSubmit } = useForm();
+  
 
   const navigate = useNavigate();
   const onSubmit = async (data) => {
@@ -28,7 +30,7 @@ function CreateDse() {
         setBlockUi(false);
         alert.error(err.response.data.message);
       });
-    }
+  };
   return (
     <>
       <div className="createDse">
@@ -54,11 +56,16 @@ function CreateDse() {
                       {...register("stock", { required: true })}
                       type="number"
                       placeholder="Enter Stock Count"
-                      
                     />
                   </Col>
                   <Col sm="8" className="mt-3">
-                    <Button type="submit">
+                    <Button
+                      type="submit"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate(nav.DSE);
+                      }}
+                    >
                       <BiLogInCircle />
                       Submit
                     </Button>
