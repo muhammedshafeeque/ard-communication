@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Mongoose } from "mongoose";
 import { Line } from "../Models/LineModal.js";
 import { Shope } from "../Models/ShopsModal.js";
 import { DSE } from "../Models/DseModal.js";
@@ -64,21 +64,43 @@ export const dseLineMapping = async (req, res, next) => {
 };
 export const userDsemapping = async (req, res, next) => {
   try {
-    await DSE.findByIdAndUpdate(req.params.id, {
-      $set: {
-        activeUser: {
-          user: req.body.userId,
-          startsFrom: moment(new Date()).format(DATE_FORMATE),
+    let dse=await DSE.findOne({'activeUser.user':new mongoose.Types.ObjectId(req.body.userId)})
+  
+    if(dse&&(req.params.id===String(dse._id))){
+      next({status:400,message:"user Allready mapped with Same dse"})
+    }else{
+      await DSE.updateOne({'activeUser.user':new mongoose.Types.ObjectId(req.body.userId)},{
+        $set: {
+          activeUser:null,
         },
-        $addToSet: {
-          userHistory: {
-            user: req.body.userId,
-            startDate: moment(new Date()).format(DATE_FORMATE),
+        $push: {
+          "userHistory": {
+            user: req.body.userId, 
+            date: moment(new Date()).format(DATE_FORMATE),
+            history:"DSE END"
           },
         },
-      },
-    });
-    res.send("user mapped to dse");
+      })
+      await DSE.findByIdAndUpdate(req.params.id, {
+        $set: {
+          activeUser: {
+            user: req.body.userId,
+            startsFrom: moment(new Date()).format(DATE_FORMATE),
+          },
+          
+        },
+        $push: {
+          "userHistory": {
+            user: req.body.userId,
+            date: moment(new Date()).format(DATE_FORMATE),
+            history:"DSE START"
+          },
+        },
+      });
+      res.send("user mapped to dse");
+    }
+    
+
   } catch (error) {
     next(error);
   }

@@ -13,6 +13,7 @@ const profileModal = mongoose.Schema(
     email: { type: String, required: true, unique: true },
     mobile: { type: Number, required: true, unique: true },
     status: { type: String, default: "active" },
+    history:[{history:{type:String},date:{type:String}}],
   },
   {
     timestaps: true,

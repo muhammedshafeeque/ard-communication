@@ -11,8 +11,8 @@ const dseModal = mongoose.Schema(
     userHistory: [
       {
         user: { type: mongoose.Schema.ObjectId ,ref: collections.PROFILE_COLLECTION},
-        startDate: { type: String },
-        End:{type:String}
+        date: { type: String },
+        history:{type:String}
       },
     ],
     lines:[{type:mongoose.Schema.Types.ObjectId,ref:collections.LINE_COLLECTION}]
