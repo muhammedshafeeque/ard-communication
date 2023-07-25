@@ -52,11 +52,20 @@ export const shopToLineMapping = async (req, res, next) => {
 };
 export const dseLineMapping = async (req, res, next) => {
   try {
-    let dse = DSE.findById(req.params.id);
+    let  line=await Line.findById(req.body.lineId)
+    await DSE.findByIdAndUpdate(String(line.dse),{
+      $pull: {lines:line._id }
+    })
+    let dse =await DSE.findById(req.params.id);
     if (!dse) next({ status: 400, message: "Dse Note Found" });
     await DSE.findByIdAndUpdate(req.params.id, {
       $addToSet: { lines: req.body.lineId },
     });
+    await Line.findByIdAndUpdate(req.body.lineId,{
+      $set:{
+        dse:req.params.id
+      }
+    })
     res.send("Line mapped to dse Successfully");
   } catch (error) {
     next(error);
@@ -64,43 +73,45 @@ export const dseLineMapping = async (req, res, next) => {
 };
 export const userDsemapping = async (req, res, next) => {
   try {
-    let dse=await DSE.findOne({'activeUser.user':new mongoose.Types.ObjectId(req.body.userId)})
-  
-    if(dse&&(req.params.id===String(dse._id))){
-      next({status:400,message:"user Allready mapped with Same dse"})
-    }else{
-      await DSE.updateOne({'activeUser.user':new mongoose.Types.ObjectId(req.body.userId)},{
-        $set: {
-          activeUser:null,
-        },
-        $push: {
-          "userHistory": {
-            user: req.body.userId, 
-            date: moment(new Date()).format(DATE_FORMATE),
-            history:"DSE END"
+    let dse = await DSE.findOne({
+      "activeUser.user": new mongoose.Types.ObjectId(req.body.userId),
+    });
+
+    if (dse && req.params.id === String(dse._id)) {
+      next({ status: 400, message: "user Allready mapped with Same dse" });
+    } else {
+      await DSE.updateOne(
+        { "activeUser.user": new mongoose.Types.ObjectId(req.body.userId) },
+        {
+          $set: {
+            activeUser: null,
           },
-        },
-      })
+          $push: {
+            userHistory: {
+              user: req.body.userId,
+              date: moment(new Date()).format(DATE_FORMATE),
+              history: "DSE END",
+            },
+          },
+        }
+      );
       await DSE.findByIdAndUpdate(req.params.id, {
         $set: {
           activeUser: {
             user: req.body.userId,
             startsFrom: moment(new Date()).format(DATE_FORMATE),
           },
-          
         },
         $push: {
-          "userHistory": {
+          userHistory: {
             user: req.body.userId,
             date: moment(new Date()).format(DATE_FORMATE),
-            history:"DSE START"
+            history: "DSE START",
           },
         },
       });
       res.send("user mapped to dse");
     }
-    
-
   } catch (error) {
     next(error);
   }

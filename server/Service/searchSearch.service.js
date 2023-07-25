@@ -18,8 +18,7 @@ export const lineSearch = async (query) => {
     query.code && (keywords.code = query.code);
 
     let lines = await Line.find(keywords)
-      .populate("dse")
-      .populate("shops")
+      // .populate("shops")
       .limit(query.limit ? parseInt(query.limit) : 10)
       .skip(query.offset ? parseInt(query.offset) : 0);
 
@@ -34,7 +33,7 @@ export const dseSearch = async (query) => {
     query.mobile && (keywords.mobile = query.mobile);
     let dses = await DSE.find(keywords)
       .populate("activeUser.user")
-      .populate("userHistory.user")
+      // .populate("userHistory.user")
       .limit(query.limit ? parseInt(query.limit) : 10)
       .skip(query.offset ? parseInt(query.offset) : 0);
     return dses;

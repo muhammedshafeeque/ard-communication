@@ -33,6 +33,7 @@ function Login() {
       })
       .catch((err) => {
         setBlockUi(false);
+        localStorage.clear()
         alert.error(err.response.data.message);
       });
   };
