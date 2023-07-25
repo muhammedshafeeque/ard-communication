@@ -13,7 +13,7 @@ function UserTypeAhead({ control, rules }) {
   };
   return (
     <div>
-      <label htmlFor="">Name</label>
+      <label htmlFor="">User</label>
       <Controller
         name="user"
         control={control}

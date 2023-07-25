@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "../../Api/Axios";
-function LineTypeAhead() {
+import { AsyncTypeahead } from "react-bootstrap-typeahead";
+import { Controller } from "react-hook-form";
+function LineTypeAhead({ control, rules }) {
   const [options, setOptions] = useState([]);
   const [selected, setSelected] = useState();
   const handleSearch = async (e) => {
@@ -11,17 +13,27 @@ function LineTypeAhead() {
   };
   return (
     <div>
-      <AsyncTypeahead
-        id="basic-example"
-        labelKey={(option) => `${option.name}`}
-        onChange={(e) => {
-          setSelected(e);
-          setSection(e);
-        }}
-        onSearch={handleSearch}
-        options={options}
-        placeholder="Search Sections..."
-        selected={selected}
+      <label htmlFor="">Line</label>
+      <Controller
+        name="line"
+        control={control}
+        rules={rules}
+        defaultValue={null}
+        render={({ field }) => (
+          <AsyncTypeahead
+            {...field}
+            id="basic-example"
+            labelKey={(option) => `${option.name}`}
+            onSearch={handleSearch}
+            options={options}
+            placeholder="Search Lines..."
+            selected={selected}
+            onChange={(selected) => {
+              field.onChange(selected[0]); // Handle single object selection
+              // onSelectionChange(selected[0]); // Pass the selected object back to the parent component
+            }}
+          />
+        )}
       />
     </div>
   );
