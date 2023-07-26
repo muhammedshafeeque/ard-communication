@@ -20,6 +20,7 @@ function App() {
   const Shops=React.lazy(()=>import('./Pages/Shop/Shops'))
   const CreateShop=React.lazy(()=>import('./Pages/Shop/createShop'))
   const Mappings=React.lazy(()=>import('./Pages/Mappings/Mapping'))
+  const AddStock=React.lazy(()=> import('./Pages/Stock/AddStock'))
   return (
     <div className="App">
       {user&& <Header/>}
@@ -39,6 +40,8 @@ function App() {
           <Route path={nav.SHOPS} element={<Shops/>}/>
           <Route path={nav.CREATE_SHOP} element={<CreateShop/>}/>
           <Route path={nav.MAPPINGS} element={<Mappings/>}/>
+          <Route path={nav.STOCK} element={<AddStock/>} />
+
         </Routes>
       </Suspense>
     </div>

@@ -10,5 +10,6 @@ export const nav = {
   CREATE_DSE:'/create-dse',
   SHOPS:'/shops',
   CREATE_SHOP:'/create-shop',
-  MAPPINGS:'/mappings'
+  MAPPINGS:'/mappings',
+  STOCK:'/add-stock'
 };
