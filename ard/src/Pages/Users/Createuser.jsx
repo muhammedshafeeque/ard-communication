@@ -23,6 +23,7 @@ function Createuser() {
       .then((res) => {
         setBlockUi(false);
         alert.success(res.data.message);
+        navigate(nav.USERS)
       })
       .catch((err) => {
         setBlockUi(false);
