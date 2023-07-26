@@ -25,11 +25,7 @@ function Login() {
         setToken(res.data.token);
         setUser(res.data.userData);
         alert.success("Login Success");
-        if (res.data && res.data.userData.aleas === "admin") {
-          navigate(nav.ADMIN_HOME);
-        } else {
-          navigate(nav.HOME);
-        }
+        window.location.reload()
       })
       .catch((err) => {
         setBlockUi(false);
