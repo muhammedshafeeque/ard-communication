@@ -6,6 +6,7 @@ import Router from "./Router/Index.js"
 import helmet from "helmet";
 import morgan from "morgan";
 import bodyParser from "body-parser";
+import path from 'path'
 // ==========Congfigs=========
 const app = express();
 dotenv.config();
@@ -19,6 +20,16 @@ app.use(cors());
 connectDb();
 // =========End Configs ======
 app.use("/api", Router);
+// -------------Deployement ------------------
+const __dirname1=path.resolve()
+
+  app.use(express.static(path.join(__dirname1,'../ard/build')))
+  app.get('*',(req,res)=>{
+    res.sendFile(path.resolve(__dirname1,"ard","build","index.html"))
+  })
+
+// -------------Deployement ------------------
+
 app.use((err, req, res, next) => {
   const errStatus = err.status || 500;
   const errMsg = err.message || "Something went wrong";
