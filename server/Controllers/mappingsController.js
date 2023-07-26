@@ -16,13 +16,13 @@ export const shopToLineMapping = async (req, res, next) => {
         let shop = await Shope.findById(element);
         if (shop) {
           if (shop.line) {
-            await Line.findByIdAndUpdate(shop.line, {
+            await Line.findByIdAndUpdate(String(shop.line), {
               $pull: { shops: element },
             });
           }
           await Shope.findByIdAndUpdate(element, {
             $set: {
-              line: line._id,
+              line: line._id, 
             },
           });
           shopArray.push(element);
@@ -52,20 +52,20 @@ export const shopToLineMapping = async (req, res, next) => {
 };
 export const dseLineMapping = async (req, res, next) => {
   try {
-    let  line=await Line.findById(req.body.lineId)
-    await DSE.findByIdAndUpdate(String(line.dse),{
-      $pull: {lines:line._id }
-    })
-    let dse =await DSE.findById(req.params.id);
+    let line = await Line.findById(req.body.lineId);
+    await DSE.findByIdAndUpdate(String(line.dse), {
+      $pull: { lines: line._id },
+    });
+    let dse = await DSE.findById(req.params.id);
     if (!dse) next({ status: 400, message: "Dse Note Found" });
     await DSE.findByIdAndUpdate(req.params.id, {
       $addToSet: { lines: req.body.lineId },
     });
-    await Line.findByIdAndUpdate(req.body.lineId,{
-      $set:{
-        dse:req.params.id
-      }
-    })
+    await Line.findByIdAndUpdate(req.body.lineId, {
+      $set: {
+        dse: req.params.id,
+      },
+    });
     res.send("Line mapped to dse Successfully");
   } catch (error) {
     next(error);

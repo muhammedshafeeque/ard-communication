@@ -4,7 +4,6 @@ import { AsyncTypeahead } from "react-bootstrap-typeahead";
 import { Controller } from "react-hook-form";
 function UserTypeAhead({ control, rules }) {
   const [options, setOptions] = useState([]);
-  const [selected, setSelected] = useState();
   const handleSearch = async (e) => {
     try {
       let { data } = await axios.get(`user/users?query=${e}`);
@@ -27,7 +26,7 @@ function UserTypeAhead({ control, rules }) {
             onSearch={handleSearch}
             options={options}
             placeholder="Search Users..."
-            selected={selected}
+    
             onChange={(selected) => {
               field.onChange(selected[0]); // Handle single object selection
               // onSelectionChange(selected[0]); // Pass the selected object back to the parent component
