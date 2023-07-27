@@ -24,7 +24,7 @@ function CreateDse() {
       .then((res) => {
         setBlockUi(false);
         alert.success(res.data.message);
-        navigate(nav.CREATE_DSE);
+        navigate(nav.DSE);
       })
       .catch((err) => {
         setBlockUi(false);
@@ -61,10 +61,6 @@ function CreateDse() {
                   <Col sm="8" className="mt-3">
                     <Button
                       type="submit"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        navigate(nav.DSE);
-                      }}
                     >
                       <BiLogInCircle />
                       Submit
