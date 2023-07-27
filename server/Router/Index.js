@@ -10,5 +10,5 @@ router.use('/auth',AuthRouter)
 router.use('/admin',verifyUser,verifyAdmin,uerControleRouter)
 router.use('/user',verifyUser,userRouter)
 router.use('/config',verifyUser,verifyAdmin,configRouter)
-router.use('/stock',verifyUser,verifyAdmin,stockRouter)
+router.use('/stock',verifyUser,stockRouter)
 export default router
