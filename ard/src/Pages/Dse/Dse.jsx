@@ -10,14 +10,12 @@ import { useAlert } from "react-alert";
 import axios from "../../Api/Axios";
 
 function Dse() {
-  const [isActive, setIsActive] = useState(false);
+  const [activeUser, setActiveUser] = useState(true);
   const [result, setResult] = useState([]);
   const navigate = useNavigate();
   const { setBlockUi } = Stor();
   const alert = useAlert();
-  const toggleActive = () => {
-    setIsActive((prevIsActive) => !prevIsActive);
-  };
+
   useEffect(() => {
     setBlockUi(true);
     axios
@@ -31,7 +29,7 @@ function Dse() {
         alert.error(err.message);
       });
   }, [alert, setBlockUi]);
-  
+
   return (
     <div>
       <Container>
@@ -63,19 +61,13 @@ function Dse() {
                 <tr key={item._id}>
                   <td>{item.mobile}</td>
                   <td>{item.stock}</td>
+                  {/* <td>{item.status}</td> */}
                   <td>
-                    <p onClick={toggleActive}>
-                      {isActive ? (
-                        <button className="greenBtn">Active</button>
-                      ) : (
-                        <button className="redBtn">NoActive</button>
-                      )}
-                    </p>
+                    <p>{activeUser ? <p>Active</p> : <p>not Active</p>}</p>
                   </td>
                 </tr>
               );
             })}
-           
           </tbody>
         </Table>
       </Container>
