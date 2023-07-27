@@ -10,7 +10,7 @@ import { useAlert } from "react-alert";
 import axios from "../../Api/Axios";
 
 function Dse() {
-  const [activeUser, setActiveUser] = useState(true);
+
   const [result, setResult] = useState([]);
   const navigate = useNavigate();
   const { setBlockUi } = Stor();
@@ -61,10 +61,7 @@ function Dse() {
                 <tr key={item._id}>
                   <td>{item.mobile}</td>
                   <td>{item.stock}</td>
-                  {/* <td>{item.status}</td> */}
-                  <td>
-                    <p>{activeUser ? <p>Active</p> : <p>not Active</p>}</p>
-                  </td>
+                  <td style={{color:item.status==='active'?'green':'black'}}>{item.status}</td>
                 </tr>
               );
             })}

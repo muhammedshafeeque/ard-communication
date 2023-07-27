@@ -8,6 +8,7 @@ const dseModal = mongoose.Schema(
       user: { type: mongoose.Schema.ObjectId,  ref: collections.PROFILE_COLLECTION },
       startsFrom:{type:String}
     },
+    status:{type:String,default:'active'},
     userHistory: [
       {
         user: { type: mongoose.Schema.ObjectId ,ref: collections.PROFILE_COLLECTION},
