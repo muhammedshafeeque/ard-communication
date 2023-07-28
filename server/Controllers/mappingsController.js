@@ -53,9 +53,12 @@ export const shopToLineMapping = async (req, res, next) => {
 export const dseLineMapping = async (req, res, next) => {
   try {
     let line = await Line.findById(req.body.lineId);
-    await DSE.findByIdAndUpdate(String(line.dse), {
-      $pull: { lines: line._id },
-    });
+    if(line.dse){
+      await DSE.findByIdAndUpdate(String(line.dse), {
+        $pull: { lines: line._id },
+      });
+    }
+
     let dse = await DSE.findById(req.params.id);
     if (!dse) next({ status: 400, message: "Dse Note Found" });
     await DSE.findByIdAndUpdate(req.params.id, {
