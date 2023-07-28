@@ -109,8 +109,14 @@ export const updateShop = async (req, res, next) => {
 };
 export const getShops = async (req, res, next) => {
   try {
-    let shops = await shopSearch(req.query);
+    if(req.user.aleas==='admin'){
+      let shops = await shopSearch(req.query);
     res.send(shops);
+    }else{
+      let dse= await  DSE.findOne({'activeUser.user':String(req.user.userId)})
+      let line=dse.lines
+    }
+    
   } catch (error) {
     next(error);
   }

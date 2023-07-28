@@ -9,6 +9,6 @@ const router=express.Router()
 router.use('/auth',AuthRouter)
 router.use('/admin',verifyUser,verifyAdmin,uerControleRouter)
 router.use('/user',verifyUser,userRouter)
-router.use('/config',verifyUser,verifyAdmin,configRouter)
+router.use('/config',verifyUser,configRouter)
 router.use('/stock',verifyUser,stockRouter)
 export default router
