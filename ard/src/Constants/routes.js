@@ -13,4 +13,5 @@ export const nav = {
   MAPPINGS: "/mappings",
   STOCK: "/stock",
   ADDSTOCK: "/add-stock",
+  RESETPASSWORD: "/resetpassword",
 };
