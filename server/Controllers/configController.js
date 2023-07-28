@@ -10,8 +10,9 @@ import { DSE } from "../Models/DseModal.js";
 import moment from "moment";
 import { DATE_FORMATE } from "../Config/Constant.js";
 import { checkNumberExist } from "../Service/commonDbVaue.service.js";
+import mongoose from "mongoose";
 export const createLine = async (req, res, next) => {
-  let {code}=req.body
+  let { code } = req.body;
   try {
     let line = await Line.findOne({ code: code });
     if (line) {
@@ -72,12 +73,15 @@ export const createDse = async (req, res, next) => {
         ],
       };
     } else {
-      body = { mobile: req.body.mobile, stock: req.body.stock ? req.body.stock : 0 };
+      body = {
+        mobile: req.body.mobile,
+        stock: req.body.stock ? req.body.stock : 0,
+      };
     }
     await DSE.create(body);
     res.send("dse Created Successfully");
   } catch (error) {
-    console.log(error)
+    console.log(error);
     next(error);
   }
 };
@@ -109,14 +113,38 @@ export const updateShop = async (req, res, next) => {
 };
 export const getShops = async (req, res, next) => {
   try {
-    if(req.user.aleas==='admin'){
+    if (req.user.aleas === "admin") {
       let shops = await shopSearch(req.query);
-    res.send(shops);
-    }else{
-      let dse= await  DSE.findOne({'activeUser.user':String(req.user.userId)})
-      let line=dse.lines
+      res.send(shops);
+    } else {
+
+      let dse = await DSE.findOne({
+        "activeUser.user": req.user._id,
+      });
+      if(dse){
+        
+        if (dse.lines&&dse.lines.length) {
+          let data = [];
+          dse.lines.forEach((line) => {
+            data.push(line);
+          });
+          req.query.line = data
+          let shops = await shopSearch(req.query);
+          res.send(shops);
+        } else {
+          next({
+            status: 400,
+            message: "Lines Note Mapped Please Contact admin",
+          });
+        }
+      }else{
+        next({
+          status: 400,
+          message: "Dse not Assaigned to you please contact  admin",
+        });
+      }
+      
     }
-    
   } catch (error) {
     next(error);
   }
