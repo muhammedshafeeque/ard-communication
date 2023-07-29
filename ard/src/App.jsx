@@ -8,7 +8,7 @@ import { nav } from "./Constants/routes";
 import Header from "./Components/Header/Header";
 
 function App() {
-  const { blockUi,user } = Stor();
+  const { blockUi, user } = Stor();
   const Home = React.lazy(() => import("./Pages/Home/Home"));
   const AdminHome = React.lazy(() => import("./Pages/AdminHome/AdminHome"));
   const Users = React.lazy(() => import("./Pages/Users/Users"));
@@ -16,15 +16,16 @@ function App() {
   const Line = React.lazy(() => import("./Pages/Line/Line"));
   const ListLine = React.lazy(() => import("./Pages/Line/ListLine"));
   const CreateUser = React.lazy(() => import("./Pages/Users/Createuser"));
-  const CreateDse=React.lazy(()=>import("./Pages/Dse/CreateDse"))
-  const Shops=React.lazy(()=>import('./Pages/Shop/Shops'))
-  const CreateShop=React.lazy(()=>import('./Pages/Shop/createShop'))
-  const Mappings=React.lazy(()=>import('./Pages/Mappings/Mapping'))
-  const AddStock=React.lazy(()=> import('./Pages/Stock/AddStock'))
+  const CreateDse = React.lazy(() => import("./Pages/Dse/CreateDse"));
+  const Shops = React.lazy(() => import("./Pages/Shop/Shops"));
+  const CreateShop = React.lazy(() => import("./Pages/Shop/createShop"));
+  const Mappings = React.lazy(() => import("./Pages/Mappings/Mapping"));
+  const AddStock = React.lazy(() => import("./Pages/Stock/AddStock"));
+  const ReportList = React.lazy(() => import("./Pages/Report/ReportList"));
+  const CreateReport = React.lazy(() => import("./Pages/Report/CreateReport"));
   return (
     <div className="App">
-      {user&& <Header/>}
-     
+      {user && <Header />}
       <BlockUi block={blockUi} />
       <Suspense fallback={<BlockUi block={true} />}>
         <Routes>
@@ -36,12 +37,13 @@ function App() {
           <Route path={nav.CREATE_LINE} element={<Line />} />
           <Route path={nav.LINES} element={<ListLine />} />
           <Route path={nav.CREATE_USER} element={<CreateUser />} />
-          <Route path={nav.CREATE_DSE} element={<CreateDse/>}/>
-          <Route path={nav.SHOPS} element={<Shops/>}/>
-          <Route path={nav.CREATE_SHOP} element={<CreateShop/>}/>
-          <Route path={nav.MAPPINGS} element={<Mappings/>}/>
-          <Route path={nav.STOCK} element={<AddStock/>} />
-
+          <Route path={nav.CREATE_DSE} element={<CreateDse />} />
+          <Route path={nav.SHOPS} element={<Shops />} />
+          <Route path={nav.CREATE_SHOP} element={<CreateShop />} />
+          <Route path={nav.MAPPINGS} element={<Mappings />} />
+          <Route path={nav.STOCK} element={<AddStock />} />
+          <Route path={nav.REPORT_LIST} element={<ReportList />} />
+          <Route path={nav.CREATE_REPORT} element={<CreateReport />} />
         </Routes>
       </Suspense>
     </div>
