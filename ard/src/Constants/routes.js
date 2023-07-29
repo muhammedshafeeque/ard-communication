@@ -14,4 +14,5 @@ export const nav = {
   STOCK: "/stock",
   ADDSTOCK: "/add-stock",
   RESETPASSWORD: "/resetpassword",
+  EDITDSE: "/editdsc",
 };

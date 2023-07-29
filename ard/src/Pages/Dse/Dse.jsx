@@ -8,9 +8,9 @@ import { nav } from "../../Constants/routes";
 import { Stor } from "../../Context/Store";
 import { useAlert } from "react-alert";
 import axios from "../../Api/Axios";
+import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 
 function Dse() {
-
   const [result, setResult] = useState([]);
   const navigate = useNavigate();
   const { setBlockUi } = Stor();
@@ -47,12 +47,13 @@ function Dse() {
 
           <h2 style={{ color: "lightblue", marginTop: -45 }}>Dse List</h2>
         </div>
-        <Table striped bordered hover responsive className="mt-4">
+        <Table striped bordered hover responsive className="mt-4 table">
           <thead>
             <tr>
               <th> MOBILE NO</th>
               <th>STOCK</th>
               <th>Status</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -61,7 +62,24 @@ function Dse() {
                 <tr key={item._id}>
                   <td>{item.mobile}</td>
                   <td>{item.stock}</td>
-                  <td style={{color:item.status==='active'?'green':'black'}}>{item.status}</td>
+                  <td
+                    style={{
+                      color: item.status === "active" ? "green" : "black",
+                    }}
+                  >
+                    {item.status}
+                  </td>
+                  <td>
+                    <span className="actions">
+                      <BsFillPencilFill
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigate(nav.EDITDSE);
+                        }}
+                      />
+                      <BsFillTrashFill className="delete-btn" />
+                    </span>
+                  </td>
                 </tr>
               );
             })}

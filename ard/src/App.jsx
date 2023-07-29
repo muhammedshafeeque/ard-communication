@@ -22,7 +22,11 @@ function App() {
   const Mappings = React.lazy(() => import("./Pages/Mappings/Mapping"));
   const Stock = React.lazy(() => import("./Pages/Stock/StockList"));
   const AddStock = React.lazy(() => import("./Pages/Stock/AddStock"));
-  const ResetPassword = React.lazy(()=> import("./Pages/ResetPassword/ResetPassword"))
+  const ResetPassword = React.lazy(() =>
+    import("./Pages/ResetPassword/ResetPassword")
+  );
+  const Actions = React.lazy(() => import("./Pages/Dse/Actions"));
+  
   return (
     <div className="App">
       {user && <Header />}
@@ -44,7 +48,9 @@ function App() {
           <Route path={nav.MAPPINGS} element={<Mappings />} />
           <Route path={nav.STOCK} element={<Stock />} />
           <Route path={nav.ADDSTOCK} element={<AddStock />} />
-          <Route path={nav.RESETPASSWORD} element={<ResetPassword/>}/>
+          <Route path={nav.RESETPASSWORD} element={<ResetPassword />} />
+          <Route path={nav.EDITDSE} element={<Actions />} />
+          {/*  */}
         </Routes>
       </Suspense>
     </div>
