@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 
 function Header() {
   const [open, setOpen] = useState(false);
- 
 
   return (
     <>
@@ -16,7 +15,11 @@ function Header() {
         <Navbar bg="transparant" data-bs-theme="dark">
           <Container>
             <Nav>
-              <h1 style={{ textAlign: "right" }}>Settings</h1>
+              <ul className="nav-links">
+                <li>
+                  <a>Settings</a>
+                </li>
+              </ul>
               {open && (
                 <div className="options">
                   <Link className="link" to="/resetpassword">

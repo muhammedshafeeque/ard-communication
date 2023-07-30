@@ -36,3 +36,22 @@
             text-decoration: none;
           }
         }
+
+
+ .nav-links {
+  list-style: none;
+  display: flex;
+}
+
+
+
+.nav-links li a {
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.nav-links li a:hover {
+  background-color: #555;
+  border-radius: 5px;
+}       
