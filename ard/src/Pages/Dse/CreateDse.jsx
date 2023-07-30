@@ -47,7 +47,7 @@ function CreateDse() {
                     <Form.Control
                       {...register("mobile", { required: true })}
                       type="number"
-                      placeholder="Enter Your Mobile No"
+                      placeholder=" Mobile No"
                     />
                   </Col>
                   <Col sm="8">
@@ -55,7 +55,7 @@ function CreateDse() {
                     <Form.Control
                       {...register("stock", { required: true })}
                       type="number"
-                      placeholder="Enter Stock Count"
+                      placeholder="=Stock Count"
                     />
                   </Col>
                   <Col sm="8" className="mt-3">

@@ -7,6 +7,7 @@ import { useAlert } from "react-alert";
 import { Stor } from "../../Context/Store";
 import { useNavigate } from "react-router-dom";
 import axios from "../../Api/Axios";
+import LineDseMapping from "../../Components/Mappings/LineDseMapping";
 
 function AddStock() {
   const { setBlockUi } = Stor();
@@ -38,19 +39,14 @@ function AddStock() {
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Row className="mt-5">
                 <Col sm="8">
-                  <Form.Label>Dse Number</Form.Label>
-                  <Form.Control
-                    {...register("mobile", { required: true })}
-                    type="number"
-                    placeholder="Dse No"
-                  />
+                  <LineDseMapping />
                 </Col>
                 <Col sm="8">
-                  <Form.Label>Stock </Form.Label>
+                  <Form.Label>Amout </Form.Label>
                   <Form.Control
-                    {...register("stock", { required: true })}
+                    {...register("amount", { required: true })}
                     type="number"
-                    placeholder="Stock Count"
+                    placeholder="Amount"
                   />
                 </Col>
                 <Col sm="8" className="mt-3">
@@ -66,7 +62,7 @@ function AddStock() {
                   </Button>
                   <Button
                     type="submit"
-                    style={{ width: "50%" }}
+                    style={{ width: "30%" }}
                     onClick={(e) => {
                       e.preventDefault();
                       navigate(nav.STOCK);

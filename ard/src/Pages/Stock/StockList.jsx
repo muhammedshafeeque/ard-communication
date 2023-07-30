@@ -7,6 +7,7 @@ import { nav } from "../../Constants/routes";
 import { Stor } from "../../Context/Store";
 import { useAlert } from "react-alert";
 import axios from "../../Api/Axios";
+import LineDseMapping from "../../Components/Mappings/LineDseMapping";
 
 function StockList() {
   const [result, setResult] = useState([]);
@@ -48,14 +49,13 @@ function StockList() {
           <thead>
             <tr>
               <th>DSE NO</th>
-              <th>STOCK</th>
+              <th>Amout</th>
             </tr>
           </thead>
           <tbody>
             {result.map((item) => {
               return (
                 <tr key={item._id}>
-                  <td>{item.mobile}</td>
                   <td>{item.amount}</td>
                 </tr>
               );
