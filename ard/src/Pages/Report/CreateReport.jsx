@@ -11,7 +11,7 @@ import { nav } from "../../Constants/routes";
 function CreateReport() {
   const { control, register, handleSubmit, setValue, getValues, watch } =
     useForm();
-    const navigate =useNavigate()
+  const navigate = useNavigate();
   const [base, setBase] = useState(null);
   const { setBlockUi } = Stor();
   const alert = useAlert();
@@ -19,11 +19,11 @@ function CreateReport() {
     control,
     name: "outStandings",
   });
-  
-  const [sale,setSale]=useState(0)
-  const [cash,setCash]=useState()
+
+  const [sale, setSale] = useState(0);
+  const [cash, setCash] = useState();
   const openingBalance = watch("opening", base ? base.stockBalance : "");
- 
+
   // Function to fetch data and set initial values
   useEffect(() => {
     axios
@@ -52,19 +52,12 @@ function CreateReport() {
         total = total + parseInt(out.amount);
       }
     });
-    let Cash=sale-total
+    let Cash = sale - total;
     setValue("cash", Cash);
-    setCash(Cash)
-   
+    setCash(Cash);
   };
 
   // Function to calculate cash and update cashToB field
-  const calculateCash = () => {
-    console.log(getValues("sale"))
-    let cash = getValues("sale") - cash
-    
-
-  };
 
   // Function to handle form submission
   const onSubmit = (data) => {
@@ -108,7 +101,12 @@ function CreateReport() {
                 placeholder="Opening Balance"
               />
             </Form.Group>
-            <Form.Group className="mt-3" as={Col} md="4" controlId="validationCustom01">
+            <Form.Group
+              className="mt-3"
+              as={Col}
+              md="4"
+              controlId="validationCustom01"
+            >
               <Form.Label>Closing Balance</Form.Label>
               <Form.Control
                 type="number"
@@ -120,19 +118,32 @@ function CreateReport() {
                   if (e.target.value > 0) {
                     setValue(
                       "sale",
-                      Math.round(((openingBalance - parseInt(e.target.value)) / 1041) * 1000)
+                      Math.round(
+                        ((openingBalance - parseInt(e.target.value)) / 1041) *
+                          1000
+                      )
                     );
-                    setSale(Math.round(((openingBalance - parseInt(e.target.value)) / 1041) * 1000))
+                    setSale(
+                      Math.round(
+                        ((openingBalance - parseInt(e.target.value)) / 1041) *
+                          1000
+                      )
+                    );
                   } else {
                     setValue("sale", 0);
-                    setSale(0)
+                    setSale(0);
                   }
-                  calculateCash();
+                  calculateOutstandings();
                 }}
                 placeholder="Closing Balance"
               />
             </Form.Group>
-            <Form.Group className="mt-3" as={Col} md="4" controlId="validationCustom01">
+            <Form.Group
+              className="mt-3"
+              as={Col}
+              md="4"
+              controlId="validationCustom01"
+            >
               <Form.Label>Sale</Form.Label>
               <Form.Control
                 type="number"
@@ -176,12 +187,18 @@ function CreateReport() {
                       type="amount"
                       {...register(`outStandings.${index}.amount`)}
                       placeholder="Amount"
-                      onChange={(e) => { e.preventDefault()
-                        handleAmountChange(index, e.target.value)}}
+                      onChange={(e) => {
+                        e.preventDefault();
+                        handleAmountChange(index, e.target.value);
+                      }}
                     />
                   </Form.Group>
                   <div className="submit-area">
-                    <Button variant="danger" className="mt-2" onClick={() => remove(index)}>
+                    <Button
+                      variant="danger"
+                      className="mt-2"
+                      onClick={() => remove(index)}
+                    >
                       Remove
                     </Button>
                   </div>
@@ -195,7 +212,12 @@ function CreateReport() {
             </Container>
           </Row>
           <Row>
-            <Form.Group className="mt-5" as={Col} md="4" controlId="validationCustom01">
+            {/* <Form.Group
+              className="mt-5"
+              as={Col}
+              md="4"
+              controlId="validationCustom01"
+            >
               <Form.Label>Cash on Bank</Form.Label>
               <Form.Control
                 type="cashOnBank"
@@ -205,22 +227,27 @@ function CreateReport() {
                 })}
                 placeholder="Cash on Bank"
               />
-            </Form.Group>
-            <Form.Group className="mt-4" as={Col} md="4" controlId="validationCustom01">
+            </Form.Group> */}
+            <Form.Group
+              className="mt-4"
+              as={Col}
+              md="4"
+              controlId="validationCustom01"
+            >
               <Form.Label>Cash</Form.Label>
-              <Form.Control
-                disabled={true}
-                {...register('cash')}
-              />
+              <Form.Control disabled={true} {...register("cash")} />
             </Form.Group>
           </Row>
           <Row>
             <Container className="mt-3 mb-4">
-            <Button type="submit" style={{width:'100%'}} disabled={isSubmitDisabled}>
-              Submit
-            </Button>
+              <Button
+                type="submit"
+                style={{ width: "100%" }}
+                disabled={isSubmitDisabled}
+              >
+                Submit
+              </Button>
             </Container>
-            
           </Row>
         </Form>
       </div>
