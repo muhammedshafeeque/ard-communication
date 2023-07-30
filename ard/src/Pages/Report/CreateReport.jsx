@@ -15,7 +15,7 @@ function CreateReport() {
   const [base, setBase] = useState(null);
   const { setBlockUi } = Stor();
   const alert = useAlert();
-  const { fields, append, remove } = useFieldArray({
+  const { fields:OutstandinFields, append, remove } = useFieldArray({
     control,
     name: "outStandings",
   });
@@ -156,7 +156,7 @@ function CreateReport() {
             </Form.Group>
             <h6 className="mt-5">Outstandings</h6>
             <Container className="submit-area">
-              {fields.length ? (
+              {OutstandinFields.length ? (
                 <Button
                   className="mb-2 mt-2 float-right"
                   onClick={(e) => {
@@ -170,7 +170,7 @@ function CreateReport() {
                 ""
               )}
             </Container>
-            {fields.map((item, index) => (
+            {OutstandinFields.map((item, index) => (
               <div key={item.id}>
                 <Row className="mb-2">
                   <Form.Group as={Col} md="2" style={{ maxWidth: "60%" }}>
