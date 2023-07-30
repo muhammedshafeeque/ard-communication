@@ -3,11 +3,11 @@ import "./Header.scss";
 
 import Sidebar from "../SideBar/Sidebar";
 import { Container, Nav, Navbar } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Header() {
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
+ 
 
   return (
     <>

@@ -63,10 +63,6 @@ function AddStock() {
                   <Button
                     type="submit"
                     style={{ width: "30%" }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      navigate(nav.STOCK);
-                    }}
                   >
                     <BiLogInCircle />
                     Submit

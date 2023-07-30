@@ -7,7 +7,6 @@ import { nav } from "../../Constants/routes";
 import { Stor } from "../../Context/Store";
 import { useAlert } from "react-alert";
 import axios from "../../Api/Axios";
-import LineDseMapping from "../../Components/Mappings/LineDseMapping";
 
 function StockList() {
   const [result, setResult] = useState([]);
