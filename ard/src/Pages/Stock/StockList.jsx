@@ -17,10 +17,11 @@ function StockList() {
   useEffect(() => {
     setBlockUi(true);
     axios
-      .get("stock/stock")
+      .get("stock/get-dse-stock")
       .then((res) => {
         setBlockUi(false);
         setResult(res.data);
+        console.log(res);
       })
       .catch((err) => {
         setBlockUi(false);
@@ -55,8 +56,8 @@ function StockList() {
             {result.map((item) => {
               return (
                 <tr key={item._id}>
-                  <td>{item.dseId}</td>
-                  <td>{item.amount}</td>
+                  <td>{item.dseNumber}</td>
+                  <td>{item.stockBalance}</td>
                 </tr>
               );
             })}
