@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import "./Dse.scss";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { nav } from "../../Constants/routes";
 import { Stor } from "../../Context/Store";
 import { useAlert } from "react-alert";
@@ -15,6 +15,13 @@ function Dse() {
   const navigate = useNavigate();
   const { setBlockUi } = Stor();
   const alert = useAlert();
+
+  const setToLocalStorage = (_id, mobile, stock, status) => {
+    localStorage.setItem("_id", _id);
+    localStorage.setItem("mobile", mobile);
+    localStorage.setItem("stock", stock);
+    localStorage.setItem("status", status);
+  };
 
   useEffect(() => {
     setBlockUi(true);
@@ -71,12 +78,19 @@ function Dse() {
                   </td>
                   <td>
                     <span className="actions">
-                      <BsFillPencilFill
-                        onClick={(e) => {
-                          e.preventDefault();
-                          navigate(nav.EDITDSE);
-                        }}
-                      />
+                      <Link to={nav.EDITDSE}>
+                        <BsFillPencilFill
+                          onClick={() =>
+                            setToLocalStorage(
+                              item._id,
+                              item.mobile,
+                              item.stock,
+                              item.status
+                            )
+                          }
+                        />
+                      </Link>
+
                       <BsFillTrashFill className="delete-btn" />
                     </span>
                   </td>
