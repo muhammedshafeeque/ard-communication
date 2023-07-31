@@ -55,6 +55,7 @@ function StockList() {
             {result.map((item) => {
               return (
                 <tr key={item._id}>
+                  <td>{item.dseId}</td>
                   <td>{item.amount}</td>
                 </tr>
               );
