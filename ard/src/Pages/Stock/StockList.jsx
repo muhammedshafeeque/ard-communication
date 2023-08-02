@@ -7,7 +7,6 @@ import { nav } from "../../Constants/routes";
 import { Stor } from "../../Context/Store";
 import { useAlert } from "react-alert";
 import axios from "../../Api/Axios";
-import LineDseMapping from "../../Components/Mappings/LineDseMapping";
 
 function StockList() {
   const [result, setResult] = useState([]);
@@ -18,10 +17,11 @@ function StockList() {
   useEffect(() => {
     setBlockUi(true);
     axios
-      .get("stock/stock")
+      .get("stock/get-dse-stock")
       .then((res) => {
         setBlockUi(false);
         setResult(res.data);
+        console.log(res);
       })
       .catch((err) => {
         setBlockUi(false);
@@ -56,7 +56,8 @@ function StockList() {
             {result.map((item) => {
               return (
                 <tr key={item._id}>
-                  <td>{item.amount}</td>
+                  <td>{item.dseNumber}</td>
+                  <td>{item.stockBalance}</td>
                 </tr>
               );
             })}

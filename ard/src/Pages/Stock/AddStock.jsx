@@ -39,7 +39,7 @@ function AddStock() {
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Row className="mt-5">
                 <Col sm="8">
-                  <LineDseMapping />
+                  <LineDseMapping {...register("dseId", { required: true })} />
                 </Col>
                 <Col sm="8">
                   <Form.Label>Amout </Form.Label>
@@ -60,14 +60,7 @@ function AddStock() {
                   >
                     Cancel
                   </Button>
-                  <Button
-                    type="submit"
-                    style={{ width: "30%" }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      navigate(nav.STOCK);
-                    }}
-                  >
+                  <Button type="submit" style={{ width: "30%" }}>
                     <BiLogInCircle />
                     Submit
                   </Button>
