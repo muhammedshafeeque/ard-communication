@@ -7,11 +7,6 @@ const OutStandigsModel = mongoose.Schema(
       required: true,
       ref: collections.SHOPS_COLLECTION,
     },
-    line: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: collections.LINE_COLLECTION,
-    },
     AddedUser: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
