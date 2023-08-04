@@ -35,7 +35,7 @@ function CreateReport() {
       })
       .catch((err) => {
         setBlockUi(false);
-        //  alert.error(err.response.data.message);
+         alert.error(err.response.data.message);
       });
   }
 
@@ -48,11 +48,22 @@ function CreateReport() {
     console.log(data)
     if (data.opening && data.closing) {
       // Fixed the condition
+      let cash=0
       let sale = Math.round(
         ((Number(data.opening) - Number(data.closing)) / 1041) * 1000
       );
+      cash=sale
+      if(data.outstandings.length){
+        data.outstandings.forEach((out)=>{
+          cash=cash-out.amount
+        })
+      }
+      if(data.cashonBank!==""){
+        cash=cash-Number(data.cashonBank)
+      }
 
       setValue("sale", sale);
+      setValue("cash",cash)
     }
   };
 
@@ -134,6 +145,24 @@ function CreateReport() {
               Add to Outstandings
             </Button>
           </div>
+          <Row>
+          <Form.Group className="col-md-4 mt-4">
+              <Form.Label>Cash On Bank</Form.Label>
+              <Form.Control
+                {...register("cashonBank")}
+                onBlur={calculator}
+                type="number"
+              />
+            </Form.Group>
+          <Form.Group className="col-md-4 mt-4">
+              <Form.Label>Liquid Cash</Form.Label>
+              <Form.Control
+                {...register("cash")}
+                disabled={true}
+                type="number"
+              />
+            </Form.Group>
+          </Row>
           <Button type="submit">Submit</Button>
         </Form>
       </Container>
