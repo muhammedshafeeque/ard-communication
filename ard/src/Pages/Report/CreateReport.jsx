@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Form, Row } from "react-bootstrap";
-import { useForm } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import axios from "../../Api/Axios";
 import { Stor } from "../../Context/Store";
 import { useAlert } from "react-alert";
+import ShopTypeAhead from "../../Components/ShopsTypeAhhead/ShopTypeAhead";
+
 function CreateReport() {
-  const { register, handleSubmit, setValue, getValues } = useForm();
+  const { handleSubmit, control, setValue, register, getValues } = useForm();
   const { setBlockUi } = Stor();
   const [baseData, setBaseData] = useState(null);
   const alert = useAlert();
+  const {
+    fields: outstandingFields,
+    append: outstandingAppend,
+    remove: outstandingRemove,
+  } = useFieldArray({
+    control,
+    name: "outstandings",
+  });
+
   const submitForm = (data) => {
     console.log(data);
   };
@@ -24,39 +35,41 @@ function CreateReport() {
       })
       .catch((err) => {
         setBlockUi(false);
-
-        alert.error(err.respones.data.message);
+        //  alert.error(err.response.data.message);
       });
   }
+
   useEffect(() => {
     getBaseData();
-  }, []);
+  }, [control]); // Added 'control' to the dependency array
 
   const calculator = () => {
-    let data=getValues()
-    if(data.opening){
-      if(data.opening!=='',data.clossing!==''){
-        let sale=Math.round(((Number(data.opening)-Number(data.clossing))/1041)*1000)
-        setValue('sale',sale)
-      }
+    let data = getValues();
+    console.log(data)
+    if (data.opening && data.closing) {
+      // Fixed the condition
+      let sale = Math.round(
+        ((Number(data.opening) - Number(data.closing)) / 1041) * 1000
+      );
+
+      setValue("sale", sale);
     }
-    
-    
   };
+
   return (
     <div>
       <Container>
         <h6 style={{ textAlign: "center" }}>Create Report</h6>
         {baseData && (
           <div className="mt-5">
-            <h6>Name:{baseData.name}</h6>
-            <h6>Dse Number:{baseData.dseNumber}</h6>
+            <h6>Name: {baseData.name}</h6>
+            <h6>Dse Number: {baseData.dseNumber}</h6>
           </div>
         )}
         <Form className="" onSubmit={handleSubmit(submitForm)}>
           <Row>
             <Form.Group className="col-md-4 mt-4">
-              <Form.Label>Opnening Balance</Form.Label>
+              <Form.Label>Opening Balance</Form.Label>
               <Form.Control
                 {...register("opening")}
                 disabled={true}
@@ -64,15 +77,15 @@ function CreateReport() {
               />
             </Form.Group>
             <Form.Group className="col-md-4 mt-4">
-              <Form.Label>Clossing Balance</Form.Label>
+              <Form.Label>Closing Balance</Form.Label>
               <Form.Control
-                {...register("clossing")}
+                {...register("closing")}
                 onBlur={calculator}
                 type="number"
               />
             </Form.Group>
             <Form.Group className="col-md-4 mt-4">
-              <Form.Label>Clossing Balance</Form.Label>
+              <Form.Label>Sale</Form.Label>
               <Form.Control
                 {...register("sale")}
                 disabled={true}
@@ -80,8 +93,49 @@ function CreateReport() {
               />
             </Form.Group>
           </Row>
-          
-          <Button type="sybmit">Submit</Button>
+          <h6 className="mt-4">Outstandings</h6>
+          {outstandingFields.map((item, index) => (
+            <Row className="col-md-12" key={index}>
+              <Form.Group className="mt-4 col-md-4" style={{ maxWidth: "40%" }} >
+              <Form.Label>Shop</Form.Label>
+                <Controller
+                  name={`outstandings[${index}].shop`}
+                  control={control}
+                  render={({ field }) => (
+                    <ShopTypeAhead
+                      control={control} // Pass 'control' prop to child component
+                      config={{ formName: "outstandings", index }}
+                      name={`outstandings[${index}].shop`}
+                    />
+                  )}
+                />
+              </Form.Group>
+
+              <Form.Group className="col-md-4 mt-4" style={{ maxWidth: "30%" }}>
+                <Form.Label>Amount</Form.Label>
+                <Form.Control
+                  {...control.register(`outstandings[${index}].amount`)}
+                  type="number"
+                  onBlur={calculator}
+                />
+              </Form.Group>
+              <Form.Group className="mt-5 pt-2 mb-3" style={{ maxWidth: "30%" }}>
+              <Button variant="danger" onClick={() => outstandingRemove(index)}>Remove</Button>
+              </Form.Group>
+              
+            </Row>
+          ))}
+          <div className="submit-area">
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                outstandingAppend({ shop: {}, amount: 0 });
+              }}
+            >
+              Add to Outstandings
+            </Button>
+          </div>
+          <Button type="submit">Submit</Button>
         </Form>
       </Container>
     </div>
