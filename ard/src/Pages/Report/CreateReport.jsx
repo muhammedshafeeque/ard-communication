@@ -104,7 +104,6 @@ function CreateReport() {
                   render={({ field }) => (
                     <ShopTypeAhead
                       control={control} // Pass 'control' prop to child component
-                      config={{ formName: "outstandings", index }}
                       name={`outstandings[${index}].shop`}
                     />
                   )}

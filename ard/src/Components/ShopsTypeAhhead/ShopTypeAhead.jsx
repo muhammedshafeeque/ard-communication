@@ -3,7 +3,7 @@ import axios from "../../Api/Axios";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
 import { Controller } from "react-hook-form";
 
-function ShopTypeAhead({ control, rules, config, name }) {
+function ShopTypeAhead({ control, rules,  name }) {
   const [options, setOptions] = useState([]);
 
   const handleSearch = async (e) => {
@@ -19,7 +19,7 @@ function ShopTypeAhead({ control, rules, config, name }) {
   return (
     <div>
       <Controller
-        name={`${config && config.array ? name : "shop"}`}
+        name={`${name ? name : "shop"}`}
         control={control}
         rules={rules}
         defaultValue={null}
