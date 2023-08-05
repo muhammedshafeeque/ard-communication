@@ -15,7 +15,7 @@ const reportModal = mongoose.Schema(
     timestaps: true,
   }
 );
-export const SALESE_CLOSSES = mongoose.model(
+export const REPORTS = mongoose.model(
   collections.REPORT_COLLECTION,
   reportModal
 );
