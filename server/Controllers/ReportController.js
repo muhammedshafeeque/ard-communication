@@ -6,6 +6,7 @@ import { OutStandigs } from "../Models/OutStandigsModal.js";
 import { Shope } from "../Models/ShopsModal.js";
 import { REPORTS } from "../Models/reportModal.js";
 import { PAYMENT } from "../Models/paymentModal.js";
+import { searchReports } from "../Service/searchSearch.service.js";
 export const createReport = async (req, res, next) => {
   try {
     let { closingBalance, outstandings, outstandIn, cashOnBank } = req.body;
@@ -14,12 +15,12 @@ export const createReport = async (req, res, next) => {
     });
     let openingBalance = dse.stock;
     let sale = Math.round(((openingBalance - closingBalance) / 1041) * 1000);
-   
+
     let cash = sale - cashOnBank;
     let date = moment(new Date()).format(DATE_FORMATE);
-    let payments
-    let outs=[]
-    if ( outstandings.length) {
+    let payments;
+    let outs = [];
+    if (outstandings.length) {
       outstandings.forEach((out) => {
         cash = cash - out.amount;
       });
@@ -35,48 +36,51 @@ export const createReport = async (req, res, next) => {
       outs = await OutStandigs.insertMany(Outstants);
     }
     let shopUpdate = new Promise((resolve, reject) => {
-      if(!outstandings.length) {resolve()}
+      if (!outstandings.length) {
+        resolve();
+      }
       outstandings.forEach(async (outs, index, array) => {
         await Shope.findByIdAndUpdate(outs.shopId, {
           $inc: {
             outstanding: outs.amount,
           },
         });
-        
-        if (index === (outstandings.length-1)) {
+
+        if (index === outstandings.length - 1) {
           resolve();
         }
       });
     });
-        if (outstandIn.length) {
-      let outstandInS=[]
+    if (outstandIn.length) {
+      let outstandInS = [];
       outstandIn.forEach((outIn) => {
         cash = cash + outIn.amount;
         outstandInS.push({
-          shop:outIn.shopId,
-          DSE:dse._id,
-          amount:outIn.amount,
-          date
-        })
+          shop: outIn.shopId,
+          DSE: dse._id,
+          amount: outIn.amount,
+          date,
+        });
       });
-      payments=  await PAYMENT.insertMany(outstandInS)
+      payments = await PAYMENT.insertMany(outstandInS);
     }
-    let payentShopUpdate= new Promise((resolve,reject)=>{
-      if(!outstandIn.length) {resolve()}
-      outstandIn.forEach(async(item,i)=>{
+    let payentShopUpdate = new Promise((resolve, reject) => {
+      if (!outstandIn.length) {
+        resolve();
+      }
+      outstandIn.forEach(async (item, i) => {
         await Shope.findByIdAndUpdate(item.shopId, {
           $inc: {
             outstanding: -item.amount,
           },
         });
-        if(i===(outstandIn.length-1)){
-          resolve()
+        if (i === outstandIn.length - 1) {
+          resolve();
         }
-         
-      })
-    })
-    await shopUpdate
-    await payentShopUpdate
+      });
+    });
+    await shopUpdate;
+    await payentShopUpdate;
     await DSE.findByIdAndUpdate(dse._id, {
       $set: {
         stock: closingBalance,
@@ -87,10 +91,10 @@ export const createReport = async (req, res, next) => {
     await outs.forEach((item) => {
       outsIds.push(item._id);
     });
-    let paymentIds=[]
-    await payments.forEach((p)=>{
-      paymentIds.push(p._id)
-    }) 
+    let paymentIds = [];
+    await payments.forEach((p) => {
+      paymentIds.push(p._id);
+    });
     let report = await REPORTS.create({
       openingBalance: openingBalance,
       closingBalance: closingBalance,
@@ -98,7 +102,7 @@ export const createReport = async (req, res, next) => {
       CashOnBank: cashOnBank,
       date,
       outstandings: outsIds,
-      payments:paymentIds,
+      payments: paymentIds,
       dse: dse._id,
     });
 
@@ -107,4 +111,16 @@ export const createReport = async (req, res, next) => {
     console.log(error);
     next(error);
   }
+};
+export const getReports = async () => {
+  try {
+    if (req.user.aleas !== "admin") {
+      let dse = await DSE.findOne({
+        "activeUser.user": new mongoose.Types.ObjectId(req.user),
+      });
+      req.query.dse=dse._id
+    }
+    let reports = await searchReports(rq.query);
+    res.send(reports);
+  } catch (error) {}
 };

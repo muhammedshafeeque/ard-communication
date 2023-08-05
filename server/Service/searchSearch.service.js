@@ -94,3 +94,7 @@ export const searchUser = async (query) => {
     throw error;
   }
 };
+
+export const searchReports=()=>{
+  
+}
