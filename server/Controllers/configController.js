@@ -117,18 +117,16 @@ export const getShops = async (req, res, next) => {
       let shops = await shopSearch(req.query);
       res.send(shops);
     } else {
-
       let dse = await DSE.findOne({
         "activeUser.user": req.user._id,
       });
-      if(dse){
-        
-        if (dse.lines&&dse.lines.length) {
+      if (dse) {
+        if (dse.lines && dse.lines.length) {
           let data = [];
           dse.lines.forEach((line) => {
             data.push(line);
           });
-          req.query.line = data
+          req.query.line = data;
           let shops = await shopSearch(req.query);
           res.send(shops);
         } else {
@@ -137,13 +135,12 @@ export const getShops = async (req, res, next) => {
             message: "Lines Note Mapped Please Contact admin",
           });
         }
-      }else{
+      } else {
         next({
           status: 400,
           message: "Dse not Assaigned to you please contact  admin",
         });
       }
-      
     }
   } catch (error) {
     next(error);

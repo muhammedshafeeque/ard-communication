@@ -42,7 +42,9 @@ function CreateReport() {
   useEffect(() => {
     getBaseData();
   }, [control]); // Added 'control' to the dependency array
+  const getOutstandings=()=>{
 
+  }
   const calculator = () => {
     let data = getValues();
     console.log(data)
