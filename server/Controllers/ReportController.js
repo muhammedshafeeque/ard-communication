@@ -18,7 +18,7 @@ export const createReport = async (req, res, next) => {
     let cash = sale - cashOnBank;
     let date = moment(new Date()).format(DATE_FORMATE);
     let payments
-    let outs;
+    let outs=[]
     if ( outstandings.length) {
       outstandings.forEach((out) => {
         cash = cash - out.amount;
@@ -65,8 +65,8 @@ export const createReport = async (req, res, next) => {
       if(!outstandIn.length) {resolve()}
       outstandIn.forEach(async(item,i)=>{
         await Shope.findByIdAndUpdate(item.shopId, {
-          $dic: {
-            outstanding: item.amount,
+          $inc: {
+            outstanding: -item.amount,
           },
         });
         if(i===(outstandIn.length-1)){
@@ -87,6 +87,10 @@ export const createReport = async (req, res, next) => {
     await outs.forEach((item) => {
       outsIds.push(item._id);
     });
+    let paymentIds=[]
+    await payments.forEach((p)=>{
+      paymentIds.push(p._id)
+    }) 
     let report = await REPORTS.create({
       openingBalance: openingBalance,
       closingBalance: closingBalance,
@@ -94,6 +98,7 @@ export const createReport = async (req, res, next) => {
       CashOnBank: cashOnBank,
       date,
       outstandings: outsIds,
+      payments:paymentIds,
       dse: dse._id,
     });
 
