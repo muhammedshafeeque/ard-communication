@@ -22,14 +22,14 @@ function Shops() {
         setBlockUi(false);
         alert.error(err.response.data.message);
       });
-  }, [alert,setBlockUi]);
+  }, [alert, setBlockUi]);
   return (
     <div>
       <Container className="mt-5">
         <h4 className="mt-5" style={{ textAlign: "center" }}>
           Shops
         </h4>
-        
+
         <div
           className="col-md-12"
           style={{ display: "flex", justifyContent: "flex-end" }}
@@ -52,12 +52,14 @@ function Shops() {
             </tr>
           </thead>
           <tbody>
-            {shops.map((item)=>{
-              return <tr key={item._id}>
-                <td>{item.name}</td>
-                <td>{item.mobile}</td>
-                <td>{item.flexiNumber}</td>
-              </tr>
+            {shops.map((item) => {
+              return (
+                <tr key={item._id}>
+                  <td>{item.name}</td>
+                  <td>{item.mobile}</td>
+                  <td>{item.flexiNumber}</td>
+                </tr>
+              );
             })}
           </tbody>
         </table>

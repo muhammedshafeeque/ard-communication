@@ -63,6 +63,10 @@ export const shopSearch = async (query) => {
     query.mobile && (keywords.mobile = query.mobile);
     query.name && (keywords.name = query.name);
     query.flexiNumber && (keywords.flexiNumber = query.flexiNumber);
+    query.outstanding &&
+      (query.outstanding === 'true'
+        ? (keywords.outstanding = { $gt: 0 })
+        : (keywords.outstanding = { $not: { $gt: 0 } }));
     let shops = await Shope.find(keywords)
       .limit(query.limit ? parseInt(query.limit) : 10)
       .skip(query.offset ? parseInt(query.offset) : 0);
@@ -90,3 +94,11 @@ export const searchUser = async (query) => {
     throw error;
   }
 };
+
+export const searchReports=()=>{
+  try {
+    
+  } catch (error) {
+    throw error
+  }
+}

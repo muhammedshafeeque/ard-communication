@@ -7,6 +7,6 @@ export const collections={
     OUTSTANDINGS_COLLECTiON:'outstandings',
     PAYMENT_COLLECTION:'payment',
     DSE_STOCK_COLLECTION:'dse_stock',
-    SALES_CLOSS_COLLECTION:'sales_closs',
+    REPORT_COLLECTION:'report',
     DSE_PAY_COLLECTION:'dse_pay'
 }

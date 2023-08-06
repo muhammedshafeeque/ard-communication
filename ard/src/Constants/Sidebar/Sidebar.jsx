@@ -3,12 +3,13 @@ import { AiOutlineHome, AiFillShop } from "react-icons/ai";
 import { FiUsers } from "react-icons/fi";
 import { BiSolidPurchaseTag } from "react-icons/bi";
 import { BiAddToQueue } from "react-icons/bi";
-import {TbCirclesRelation} from 'react-icons/tb'
+import { TbCirclesRelation, TbReportSearch } from "react-icons/tb";
 import { RiArchiveDrawerLine } from "react-icons/ri";
 
 export const HomeSidebar = [
   { name: "Home", nav: nav.HOME, icon: AiOutlineHome },
   { name: "Shops", nav: nav.SHOPS, icon: AiFillShop },
+  { name: "Report", nav: nav.REPORT_LIST, icon: TbReportSearch },
 ];
 export const AdminSideBar = [
   { name: "Home", nav: nav.HOME, icon: AiOutlineHome },

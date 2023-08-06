@@ -25,10 +25,9 @@ function ListLine() {
         setBlockUi(false);
         alert.error(err.message);
       });
-  }, [alert,setBlockUi]);
+  }, [alert, setBlockUi]);
   return (
     <div>
-
       <Container>
         <div className="title">
           <h1>Line Lists</h1>
@@ -36,34 +35,27 @@ function ListLine() {
             <Button className="btn-lg float-right">Create Line</Button>
           </Link>
         </div>
-
         <Table striped bordered hover className="mt-3">
           <thead>
             <tr>
-      
               <th> Name</th>
               <th>Code</th>
               <th>Action</th>
             </tr>
           </thead>
-        
           <tbody>
-              {result.map((item)=>{
-            return (
-              <tr key={item._id}>
-                <td>{item.name}</td>
-
-                <td>{item.code}</td>
-
-                <td style={{display:'flex'}}>
-                  <p>Edit</p>
-                  <AiFillDelete />
-                </td>
-              </tr>
-            );
-          })}
-           
-
+            {result.map((item) => {
+              return (
+                <tr key={item._id}>
+                  <td>{item.name}</td>
+                  <td>{item.code}</td>
+                  <td style={{ display: "flex" }}>
+                    <p>Edit</p>
+                    <AiFillDelete />
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </Table>
       </Container>
