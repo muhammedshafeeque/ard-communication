@@ -96,5 +96,9 @@ export const searchUser = async (query) => {
 };
 
 export const searchReports=()=>{
-  
+  try {
+    
+  } catch (error) {
+    throw error
+  }
 }
