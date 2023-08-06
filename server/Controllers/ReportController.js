@@ -18,7 +18,7 @@ export const createReport = async (req, res, next) => {
 
     let cash = sale - cashOnBank;
     let date = moment(new Date()).format(DATE_FORMATE);
-    let payments;
+    let payments=[]
     let outs = [];
     if (outstandings.length) {
       outstandings.forEach((out) => {
@@ -63,6 +63,7 @@ export const createReport = async (req, res, next) => {
         });
       });
       payments = await PAYMENT.insertMany(outstandInS);
+
     }
     let payentShopUpdate = new Promise((resolve, reject) => {
       if (!outstandIn.length) {
