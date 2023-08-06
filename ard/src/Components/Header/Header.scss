@@ -10,3 +10,48 @@
   border-bottom: solid 2px var(--border);
 }
 
+.settings{
+  text-align: right;
+  justify-content: end;
+  align-items: flex-end;
+  
+  
+}
+.options {
+          position: absolute;
+          top: 50px;
+          right: 0;
+          padding: 20px;
+          background-color: white;
+          border-radius: 10px;
+          border: 1px solid lightgray;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          color: gray;
+          width: 200px;
+          font-weight: 300;
+
+          .link{
+            text-decoration: none;
+          }
+        }
+
+
+ .nav-links {
+  list-style: none;
+  display: flex;
+}
+
+
+
+.nav-links li a {
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.nav-links li a:hover {
+  background-color: #555;
+  border-radius: 5px;
+}       

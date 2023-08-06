@@ -11,8 +11,11 @@ export const nav = {
   SHOPS: "/shops",
   CREATE_SHOP: "/create-shop",
   MAPPINGS: "/mappings",
-  STOCK: "/add-stock",
   CREATE_REPORT: "/create-report",
   REPORT_LIST: "/report-list",
   VEIW_REPORT: "/report-view",
+  STOCK: "/stock",
+  ADDSTOCK: "/add-stock",
+  RESETPASSWORD: "/resetpassword",
+  EDITDSE: "/editdsc",
 };

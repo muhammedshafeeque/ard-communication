@@ -2,15 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import "./Dse.scss";
 import { useNavigate } from "react-router-dom";
 import { nav } from "../../Constants/routes";
 import { Stor } from "../../Context/Store";
 import { useAlert } from "react-alert";
 import axios from "../../Api/Axios";
-import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 
-function Dse() {
+function StockList() {
   const [result, setResult] = useState([]);
   const navigate = useNavigate();
   const { setBlockUi } = Stor();
@@ -19,17 +17,17 @@ function Dse() {
   useEffect(() => {
     setBlockUi(true);
     axios
-      .get("config/dse")
+      .get("stock/get-dse-stock")
       .then((res) => {
         setBlockUi(false);
         setResult(res.data);
+        console.log(res);
       })
       .catch((err) => {
         setBlockUi(false);
         alert.error(err.message);
       });
   }, [alert, setBlockUi]);
-
   return (
     <div>
       <Container>
@@ -38,48 +36,28 @@ function Dse() {
             className="offset-10 mt-4 "
             onClick={(e) => {
               e.preventDefault();
-              navigate(nav.CREATE_DSE);
+              navigate(nav.ADDSTOCK);
             }}
             variant="success"
           >
-            Create DSC
+            Add Stock
           </Button>
 
-          <h2 style={{ color: "lightblue", marginTop: -45 }}>Dse List</h2>
+          <h2 style={{ color: "lightblue", marginTop: -45 }}>Stock List</h2>
         </div>
-        <Table striped bordered hover responsive className="mt-4 table">
+        <Table striped bordered hover responsive className="mt-4">
           <thead>
             <tr>
-              <th> MOBILE NO</th>
-              <th>STOCK</th>
-              <th>Status</th>
-              <th>Actions</th>
+              <th>DSE NO</th>
+              <th>Amout</th>
             </tr>
           </thead>
           <tbody>
             {result.map((item) => {
               return (
                 <tr key={item._id}>
-                  <td>{item.mobile}</td>
-                  <td>{item.stock}</td>
-                  <td
-                    style={{
-                      color: item.status === "active" ? "green" : "black",
-                    }}
-                  >
-                    {item.status}
-                  </td>
-                  <td>
-                    <span className="actions">
-                      <BsFillPencilFill
-                        onClick={(e) => {
-                          e.preventDefault();
-                          navigate(nav.EDITDSE);
-                        }}
-                      />
-                      <BsFillTrashFill className="delete-btn" />
-                    </span>
-                  </td>
+                  <td>{item.dseNumber}</td>
+                  <td>{item.stockBalance}</td>
                 </tr>
               );
             })}
@@ -90,4 +68,4 @@ function Dse() {
   );
 }
 
-export default Dse;
+export default StockList;

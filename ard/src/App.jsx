@@ -20,12 +20,18 @@ function App() {
   const Shops = React.lazy(() => import("./Pages/Shop/Shops"));
   const CreateShop = React.lazy(() => import("./Pages/Shop/createShop"));
   const Mappings = React.lazy(() => import("./Pages/Mappings/Mapping"));
+  const Stock = React.lazy(() => import("./Pages/Stock/StockList"));
   const AddStock = React.lazy(() => import("./Pages/Stock/AddStock"));
-  const ReportList = React.lazy(() => import("./Pages/Report/ReportList"));
-  const CreateReport = React.lazy(() => import("./Pages/Report/CreateReport"));
+  const ResetPassword = React.lazy(() =>
+    import("./Pages/ResetPassword/ResetPassword")
+  );
+  const Actions = React.lazy(() => import("./Pages/Dse/Actions"));
+  const Reports=React.lazy(()=>import("./Pages/Report/ReportList"))
+  const CreateReport=React.lazy(()=>import("./Pages/Report/CreateReport"))
   return (
     <div className="App">
       {user && <Header />}
+
       <BlockUi block={blockUi} />
       <Suspense fallback={<BlockUi block={true} />}>
         <Routes>
@@ -41,9 +47,13 @@ function App() {
           <Route path={nav.SHOPS} element={<Shops />} />
           <Route path={nav.CREATE_SHOP} element={<CreateShop />} />
           <Route path={nav.MAPPINGS} element={<Mappings />} />
-          <Route path={nav.STOCK} element={<AddStock />} />
-          <Route path={nav.REPORT_LIST} element={<ReportList />} />
-          <Route path={nav.CREATE_REPORT} element={<CreateReport />} />
+          <Route path={nav.STOCK} element={<Stock />} />
+          <Route path={nav.ADDSTOCK} element={<AddStock />} />
+          <Route path={nav.RESETPASSWORD} element={<ResetPassword />} />
+          <Route path={nav.EDITDSE} element={<Actions />} />
+          <Route path={nav.REPORT_LIST} element={<Reports/>}/>
+          <Route path={nav.CREATE_REPORT} element={<CreateReport/>}/>
+          {/*  */}
         </Routes>
       </Suspense>
     </div>
