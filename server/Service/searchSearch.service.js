@@ -64,7 +64,7 @@ export const shopSearch = async (query) => {
     query.name && (keywords.name = query.name);
     query.flexiNumber && (keywords.flexiNumber = query.flexiNumber);
     query.outstanding &&
-      (query.outstanding === true
+      (query.outstanding === 'true'
         ? (keywords.outstanding = { $gt: 0 })
         : (keywords.outstanding = { $not: { $gt: 0 } }));
     let shops = await Shope.find(keywords)

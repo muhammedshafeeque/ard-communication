@@ -106,9 +106,8 @@ export const createReport = async (req, res, next) => {
       dse: dse._id,
     });
 
-    res.send(report);
+    res.send('Report submitted Successfully');
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };
