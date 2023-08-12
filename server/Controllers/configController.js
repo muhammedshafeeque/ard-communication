@@ -113,7 +113,7 @@ export const updateShop = async (req, res, next) => {
 };
 export const getShops = async (req, res, next) => {
   try {
-    if (req.user.aleas === "admin") {
+    if (req.user.alias === "admin") {
       let shops = await shopSearch(req.query);
       res.send(shops);
     } else {

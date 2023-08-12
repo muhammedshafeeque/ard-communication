@@ -52,7 +52,7 @@ function Users() {
                 <tr key={item._id}>
                   <td>{item.name}</td>
                   <td>{item.status}</td>
-                  <td>{item.aleas}</td>
+                  <td>{item.alias}</td>
                 </tr>
               );
             })}

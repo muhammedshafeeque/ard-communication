@@ -40,7 +40,7 @@ function Login() {
         .get("auth/get-req-user")
         .then((res) => {
           if (res.data) {
-            if (res.data.aleas && res.data.aleas === "admin") {
+            if (res.data.alias && res.data.alias === "admin") {
               navigate(nav.ADMIN_HOME);
             } else {
               navigate(nav.HOME);

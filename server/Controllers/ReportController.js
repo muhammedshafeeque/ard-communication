@@ -114,7 +114,7 @@ export const createReport = async (req, res, next) => {
 };
 export const getReports = async () => {
   try {
-    if (req.user.aleas !== "admin") {
+    if (req.user.alias !== "admin") {
       let dse = await DSE.findOne({
         "activeUser.user": new mongoose.Types.ObjectId(req.user),
       });

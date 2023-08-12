@@ -9,7 +9,7 @@ const profileModal = mongoose.Schema(
       required: true,
       unique: true,
     },
-    aleas: { type: String },
+    alias: { type: String },
     email: { type: String, required: true, unique: true },
     mobile: { type: Number, required: true, unique: true },
     status: { type: String, default: "active" },

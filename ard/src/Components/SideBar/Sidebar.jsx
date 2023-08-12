@@ -16,7 +16,7 @@ function Sidebar() {
   const { user } = Stor();
   const navigate = useNavigate();
   useEffect(() => {
-    if (user && user.aleas === "admin") {
+    if (user && user.alias === "admin") {
       setSidebar(AdminSideBar);
     } else {
       setSidebar(HomeSidebar);

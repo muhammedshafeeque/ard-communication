@@ -34,7 +34,7 @@ export const craeteUser = async (req, res, next) => {
 export const getUsers = async (req, res, next) => {
   try {
     let query = req.query;
-    req.user.aleas !== "admin" && (query.excludeAleas = "admin");
+    req.user.alias !== "admin" && (query.excludeAlias = "admin");
     let users = await searchUser(query);
     res.send(users);
   } catch (error) {

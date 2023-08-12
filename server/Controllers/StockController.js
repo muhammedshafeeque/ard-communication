@@ -40,7 +40,7 @@ export const getStocks = async (req, res, next) => {
 export const getDseStocks = async (req, res, next) => {
   try {
     let query = req.query;
-    if (req.user.aleas !== "admin") {
+    if (req.user.alias !== "admin") {
       let dse = await DSE.findOne({ "activeUser.user": req.user._id });
       if (!dse) {
         next({
