@@ -1,7 +1,10 @@
+import moment from "moment";
 import { DSE } from "../Models/DseModal.js";
 import { Line } from "../Models/LineModal.js";
 import { Profile } from "../Models/ProfileModal.js";
 import { Shope } from "../Models/ShopsModal.js";
+import { REPORTS } from "../Models/reportModal.js";
+import { DATE_FORMATE } from "../Config/Constant.js";
 
 export const lineSearch = async (query) => {
   try {
@@ -94,9 +97,27 @@ export const searchUser = async (query) => {
   }
 };
 
-export const searchReports = (query) => {
+export const searchReports = async (query) => {
+  
   try {
     let keywords = {};
+
+    if (query.fromDate && query.toDate) {
+      keywords.createdAt = {
+        $gte: moment(query.fromDate, "DD-MM-YYYY").toDate(),
+        $lt: moment(query.toDate, "DD-MM-YYYY").toDate(),
+      };
+    }
+
+    if (query.dse) {
+      keywords.dse = query.dse;
+    }
+
+    let reports = await REPORTS.find(keywords)
+      .limit(query.limit ? parseInt(query.limit) : 10)
+      .skip(query.offset ? parseInt(query.offset) : 0);
+
+    return reports;
   } catch (error) {
     throw error;
   }
