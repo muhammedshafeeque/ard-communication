@@ -7,12 +7,12 @@ const reportModal = mongoose.Schema(
     liquidCash: { type: Number, required: true },
     CashOnBank: { type: Number, required: true },
     date: { type: String, required: true },
-    outstandings: [{type: mongoose.Schema.Types.ObjectId,ref:collections.OUTSTANDINGS_COLLECTiON}],
+    outstandings: [{type: mongoose.Schema.Types.ObjectId,ref:collections.OUTSTANDING_COLLECTiON}],
     payments:[{type: mongoose.Schema.Types.ObjectId,ref:collections.PAYMENT_COLLECTION}],
     dse:{type: mongoose.Schema.Types.ObjectId,ref:collections.DSE_COLLECTION}
   },
   {
-    timestaps: true,
+    timestamps: true,
   }
 );
 export const REPORTS = mongoose.model(

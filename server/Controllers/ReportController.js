@@ -112,15 +112,17 @@ export const createReport = async (req, res, next) => {
     next(error);
   }
 };
-export const getReports = async () => {
+export const getReports = async (req,res,next) => {
   try {
-    if (req.user.aleas !== "admin") {
+    if (req.user.alias !== "admin") {
       let dse = await DSE.findOne({
         "activeUser.user": new mongoose.Types.ObjectId(req.user),
       });
       req.query.dse=dse._id
     }
-    let reports = await searchReports(rq.query);
+    let reports = await searchReports(req.query);
     res.send(reports);
-  } catch (error) {}
+  } catch (error) {
+    next(error)
+  }
 };

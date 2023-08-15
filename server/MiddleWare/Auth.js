@@ -25,7 +25,7 @@ export const verifyUser = async (req, res, next) => {
   }
 };
 export const verifyAdmin = async (req, res, next) => {
-  if (req.user.aleas === "admin") {
+  if (req.user.alias === "admin") {
     next();
   } else {
     res.status(403).json("Not authorized, You are Not Admin");

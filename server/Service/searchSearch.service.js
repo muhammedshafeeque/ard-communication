@@ -1,8 +1,11 @@
+import moment from "moment";
 import { DSE } from "../Models/DseModal.js";
 import { Line } from "../Models/LineModal.js";
 import { Profile } from "../Models/ProfileModal.js";
 import { Shope } from "../Models/ShopsModal.js";
-import { User } from "../Models/UserModel.js";
+import { REPORTS } from "../Models/reportModal.js";
+import { DATE_FORMATE } from "../Config/Constant.js";
+import { collections } from "../Config/Collections.js";
 
 export const lineSearch = async (query) => {
   try {
@@ -64,7 +67,7 @@ export const shopSearch = async (query) => {
     query.name && (keywords.name = query.name);
     query.flexiNumber && (keywords.flexiNumber = query.flexiNumber);
     query.outstanding &&
-      (query.outstanding === 'true'
+      (query.outstanding === "true"
         ? (keywords.outstanding = { $gt: 0 })
         : (keywords.outstanding = { $not: { $gt: 0 } }));
     let shops = await Shope.find(keywords)
@@ -83,8 +86,8 @@ export const searchUser = async (query) => {
         $or: [{ name: { $regex: query.query, $options: "i" } }],
       });
     query.name && (keywords.name = query.name);
-    query.excludeAleas && (keywords.aleas = { $ne: excludeAleas });
-    query.aleas && (keywords.aleas = query.aleas);
+    query.excludeAlias && (keywords.alias = { $ne: excludeAlias });
+    query.alias && (keywords.alias = query.alias);
 
     let users = await Profile.find(keywords)
       .limit(query.limit ? parseInt(query.limit) : 10)
@@ -95,10 +98,35 @@ export const searchUser = async (query) => {
   }
 };
 
-export const searchReports=()=>{
+export const searchReports = async (query) => {
   try {
-    
+    let keywords = {};
+
+    if (query.fromDate && query.toDate) {
+      keywords.createdAt = {
+        $gte: moment(query.fromDate, "DD-MM-YYYY").toDate(),
+        $lt: moment(query.toDate, "DD-MM-YYYY").add(1, "days").toDate(),
+      };
+    }
+
+    if (query.dse) {
+      keywords.dse = query.dse;
+    }
+
+    let reports = await REPORTS.find(keywords)
+    .populate({ 
+      path: 'dse',
+      populate: {
+        path: 'activeUser.user',
+        model: collections.PROFILE_COLLECTION
+      } 
+   })
+      .sort({ createdAt: -1 })
+      .limit(query.limit ? parseInt(query.limit) : 10)
+      .skip(query.offset ? parseInt(query.offset) : 0);
+
+    return reports;
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};

@@ -20,6 +20,6 @@ const OutStandigsModel = mongoose.Schema(
   }
 );
 export const OutStandigs = mongoose.model(
-  collections.OUTSTANDINGS_COLLECTiON,
+  collections.OUTSTANDING_COLLECTiON,
   OutStandigsModel
 );
