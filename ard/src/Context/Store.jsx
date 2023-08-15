@@ -26,7 +26,7 @@ const ArdProvider = ({ children }) => {
         navigate(nav.LOGIN);
       }
     }
-  }, [navigate,user]);
+  }, [navigate, user]);
   return (
     <StoreContext.Provider value={{ user, setUser, blockUi, setBlockUi }}>
       {children}

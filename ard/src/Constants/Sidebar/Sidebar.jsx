@@ -19,4 +19,5 @@ export const AdminSideBar = [
   { name: "Stock", nav: nav.STOCK, icon: RiArchiveDrawerLine },
   { name: "Shops", nav: nav.SHOPS, icon: AiFillShop },
   { name: "Mapping", nav: nav.MAPPINGS, icon: TbCirclesRelation },
+  { name: "Report", nav: nav.REPORT_LIST, icon: TbReportSearch },
 ];

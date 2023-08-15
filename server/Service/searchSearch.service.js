@@ -5,6 +5,7 @@ import { Profile } from "../Models/ProfileModal.js";
 import { Shope } from "../Models/ShopsModal.js";
 import { REPORTS } from "../Models/reportModal.js";
 import { DATE_FORMATE } from "../Config/Constant.js";
+import { collections } from "../Config/Collections.js";
 
 export const lineSearch = async (query) => {
   try {
@@ -97,21 +98,14 @@ export const searchUser = async (query) => {
   }
 };
 
-
 export const searchReports = async (query) => {
-  // console.log(data)
-  // let query = {
-  //   fromDate: '12-08-2023',
-  //   toDate: '15-08-2023'
-  // };
-
   try {
     let keywords = {};
 
     if (query.fromDate && query.toDate) {
       keywords.createdAt = {
         $gte: moment(query.fromDate, "DD-MM-YYYY").toDate(),
-        $lt: moment(query.toDate, "DD-MM-YYYY").add(1, 'days').toDate(),
+        $lt: moment(query.toDate, "DD-MM-YYYY").add(1, "days").toDate(),
       };
     }
 
@@ -120,6 +114,14 @@ export const searchReports = async (query) => {
     }
 
     let reports = await REPORTS.find(keywords)
+    .populate({ 
+      path: 'dse',
+      populate: {
+        path: 'activeUser.user',
+        model: collections.PROFILE_COLLECTION
+      } 
+   })
+      .sort({ createdAt: -1 })
       .limit(query.limit ? parseInt(query.limit) : 10)
       .skip(query.offset ? parseInt(query.offset) : 0);
 
