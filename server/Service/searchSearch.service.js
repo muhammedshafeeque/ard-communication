@@ -97,15 +97,21 @@ export const searchUser = async (query) => {
   }
 };
 
+
 export const searchReports = async (query) => {
-  
+  // console.log(data)
+  // let query = {
+  //   fromDate: '12-08-2023',
+  //   toDate: '15-08-2023'
+  // };
+
   try {
     let keywords = {};
 
     if (query.fromDate && query.toDate) {
       keywords.createdAt = {
         $gte: moment(query.fromDate, "DD-MM-YYYY").toDate(),
-        $lt: moment(query.toDate, "DD-MM-YYYY").toDate(),
+        $lt: moment(query.toDate, "DD-MM-YYYY").add(1, 'days').toDate(),
       };
     }
 
