@@ -27,6 +27,9 @@ function ReportList() {
       alert.error(err.response.data.message)
      })
   }
+  const handleView=(item)=>{
+    navigate(nav.VIEW_REPORT+`/${item._id}`)
+  }
   return (
     <div>
       <Container>
@@ -72,7 +75,7 @@ function ReportList() {
       </div>
       <Container></Container>
       <div className="col-md-12 p-2">
-        <Table striped bordered hover size="sm" className="col-md-12">
+        <Table striped bordered hover size="sm" className="col-md-12" style={{maxWidth:'99%'}}>
           <thead>
             <tr>
               <th>Dse</th>
@@ -82,7 +85,7 @@ function ReportList() {
           </thead>
           <tbody>
             {reports.map((item)=>{
-              return <tr key={item._id}>
+              return <tr key={item._id} onClick={()=>{handleView(item)}}>
               <td>{item.dse.activeUser?.user.name}</td>
               <td>{item.date}</td>
               <td>{Math.round(((item.openingBalance-item.closingBalance)/1041)*1041)}</td>
