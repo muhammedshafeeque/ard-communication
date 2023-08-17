@@ -43,7 +43,7 @@ function Shops() {
             Create Shop
           </Button>
         </div>
-        <table className="table table-bordered mt-4">
+        <table className="table table-bordered mt-4" style={{maxWidth:'100%'}}>
           <thead>
             <tr>
               <th> Name </th>

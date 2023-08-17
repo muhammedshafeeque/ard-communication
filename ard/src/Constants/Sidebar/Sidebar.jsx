@@ -12,7 +12,7 @@ export const HomeSidebar = [
   { name: "Report", nav: nav.REPORT_LIST, icon: TbReportSearch },
 ];
 export const AdminSideBar = [
-  { name: "Home", nav: nav.HOME, icon: AiOutlineHome },
+  { name: "Home", nav: nav.ADMIN_HOME, icon: AiOutlineHome },
   { name: "Users", nav: nav.USERS, icon: FiUsers },
   { name: "DSE", nav: nav.DSE, icon: BiSolidPurchaseTag },
   { name: "Line", nav: nav.LINES, icon: BiAddToQueue },
