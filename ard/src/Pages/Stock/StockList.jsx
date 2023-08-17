@@ -49,7 +49,7 @@ function StockList() {
           <thead>
             <tr>
               <th>DSE NO</th>
-              <th>Amout</th>
+              <th>Amount</th>
             </tr>
           </thead>
           <tbody>

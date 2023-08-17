@@ -7,20 +7,20 @@ import { useAlert } from "react-alert";
 import { Stor } from "../../Context/Store";
 import { useNavigate } from "react-router-dom";
 import axios from "../../Api/Axios";
-import LineDseMapping from "../../Components/Mappings/LineDseMapping";
-
+import DseSelect from "../../Components/DseSelect/DseSelect";
 function AddStock() {
   const { setBlockUi } = Stor();
   const alert = useAlert();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit,control } = useForm();
   const navigate = useNavigate();
   const onSubmit = async (data) => {
+    
     setBlockUi(true);
     axios
-      .post("stock/stock", data)
+      .post("stock/stock", {dseId:data.dse,amount:data.amount})
       .then((res) => {
         setBlockUi(false);
-        alert.success(res.data.message);
+        alert.success(res.data);
         navigate(nav.STOCK);
       })
       .catch((err) => {
@@ -39,10 +39,10 @@ function AddStock() {
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Row className="mt-5">
                 <Col sm="8">
-                  <LineDseMapping {...register("dseId", { required: true })} />
+                  <DseSelect control={control}/>
                 </Col>
                 <Col sm="8">
-                  <Form.Label>Amout </Form.Label>
+                  <Form.Label>Amount </Form.Label>
                   <Form.Control
                     {...register("amount", { required: true })}
                     type="number"
@@ -50,7 +50,10 @@ function AddStock() {
                   />
                 </Col>
                 <Col sm="8" className="mt-3">
+         
+                  <div className="submit-area">
                   <Button
+                    className="mr-2"
                     variant="secondary"
                     style={{ width: "20%" }}
                     onClick={(e) => {
@@ -61,9 +64,10 @@ function AddStock() {
                     Cancel
                   </Button>
                   <Button type="submit" style={{ width: "30%" }}>
-                    <BiLogInCircle />
                     Submit
                   </Button>
+                  </div>
+            
                 </Col>
               </Row>
             </Form.Group>
