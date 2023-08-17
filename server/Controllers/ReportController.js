@@ -7,6 +7,7 @@ import { Shope } from "../Models/ShopsModal.js";
 import { REPORTS } from "../Models/reportModal.js";
 import { PAYMENT } from "../Models/paymentModal.js";
 import { searchReports } from "../Service/searchSearch.service.js";
+import { collections } from "../Config/Collections.js";
 export const createReport = async (req, res, next) => {
   try {
     let { closingBalance, outstandings, outstandIn, cashOnBank } = req.body;
@@ -18,7 +19,7 @@ export const createReport = async (req, res, next) => {
 
     let cash = sale - cashOnBank;
     let date = moment(new Date()).format(DATE_FORMATE);
-    let payments=[]
+    let payments = [];
     let outs = [];
     if (outstandings.length) {
       outstandings.forEach((out) => {
@@ -63,7 +64,6 @@ export const createReport = async (req, res, next) => {
         });
       });
       payments = await PAYMENT.insertMany(outstandInS);
-
     }
     let payentShopUpdate = new Promise((resolve, reject) => {
       if (!outstandIn.length) {
@@ -107,22 +107,70 @@ export const createReport = async (req, res, next) => {
       dse: dse._id,
     });
 
-    res.send('Report submitted Successfully');
+    res.send("Report submitted Successfully");
   } catch (error) {
     next(error);
   }
 };
-export const getReports = async (req,res,next) => {
+export const getReports = async (req, res, next) => {
   try {
     if (req.user.alias !== "admin") {
       let dse = await DSE.findOne({
         "activeUser.user": new mongoose.Types.ObjectId(req.user),
       });
-      req.query.dse=dse._id
+      req.query.dse = dse._id;
     }
     let reports = await searchReports(req.query);
     res.send(reports);
   } catch (error) {
-    next(error)
+    next(error);
+  }
+};
+export const getReportData = async (req, res, next) => {
+  try {
+    if (req.user.alias !== "admin") {
+      let dse = await DSE.findOne({
+        "activeUser.user": new mongoose.Types.ObjectId(req.user),
+      });
+      req.query.dse = dse._id;
+    }
+    let keywords = { _id: new mongoose.Types.ObjectId(req.params.id) };
+    if (req.query.dse) {
+      keywords.dse = req.query.dse;
+    }
+    let report = await REPORTS.findOne(keywords)
+      .populate({
+        path: "dse",
+        populate: {
+          path: "activeUser.user",
+          model: collections.PROFILE_COLLECTION,
+        },
+      })
+      .populate({
+        path: "payments",
+        populate: {
+          path: "shop",
+          model: collections.SHOPS_COLLECTION,
+        },
+      })
+      .populate({
+        path: "outstandings",
+        populate: {
+          path: "shop",
+          model: collections.SHOPS_COLLECTION,
+        },
+      })
+      .populate({
+        path: "outstandings",
+   
+        populate:{
+          path:'AddedUser',
+          model:collections.PROFILE_COLLECTION
+        }
+      });
+    res.send(report);
+  } catch (error) {
+
+    next(error);
   }
 };

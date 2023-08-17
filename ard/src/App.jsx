@@ -26,8 +26,9 @@ function App() {
     import("./Pages/ResetPassword/ResetPassword")
   );
   const Actions = React.lazy(() => import("./Pages/Dse/Actions"));
-  const Reports=React.lazy(()=>import("./Pages/Report/ReportList"))
-  const CreateReport=React.lazy(()=>import("./Pages/Report/CreateReport"))
+  const Reports = React.lazy(() => import("./Pages/Report/ReportList"));
+  const CreateReport = React.lazy(() => import("./Pages/Report/CreateReport"));
+  const ViewReport = React.lazy(() => import("./Pages/Report/ViewReport"));
   return (
     <div className="App">
       {user && <Header />}
@@ -51,9 +52,9 @@ function App() {
           <Route path={nav.ADDSTOCK} element={<AddStock />} />
           <Route path={nav.RESETPASSWORD} element={<ResetPassword />} />
           <Route path={nav.EDITDSE} element={<Actions />} />
-          <Route path={nav.REPORT_LIST} element={<Reports/>}/>
-          <Route path={nav.CREATE_REPORT} element={<CreateReport/>}/>
-          {/*  */}
+          <Route path={nav.REPORT_LIST} element={<Reports />} />
+          <Route path={nav.CREATE_REPORT} element={<CreateReport />} />
+          <Route path={nav.VIEW_REPORT+'/:id'} element={<ViewReport />} />
         </Routes>
       </Suspense>
     </div>

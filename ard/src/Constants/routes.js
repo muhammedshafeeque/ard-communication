@@ -13,7 +13,7 @@ export const nav = {
   MAPPINGS: "/mappings",
   CREATE_REPORT: "/create-report",
   REPORT_LIST: "/report-list",
-  VEIW_REPORT: "/report-view",
+  VIEW_REPORT: "/report-view",
   STOCK: "/stock",
   ADDSTOCK: "/add-stock",
   RESETPASSWORD: "/resetpassword",
