@@ -136,7 +136,7 @@ export const getReportData = async (req, res, next) => {
     }
     let keywords = { _id: new mongoose.Types.ObjectId(req.params.id) };
     if (req.query.dse) {
-      keywords.dse = query.dse;
+      keywords.dse = req.query.dse;
     }
     let report = await REPORTS.findOne(keywords)
       .populate({
@@ -170,6 +170,7 @@ export const getReportData = async (req, res, next) => {
       });
     res.send(report);
   } catch (error) {
+
     next(error);
   }
 };

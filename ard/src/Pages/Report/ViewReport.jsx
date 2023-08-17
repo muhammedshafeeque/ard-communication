@@ -72,7 +72,7 @@ function ViewReport() {
             </thead>
           </Table>
         <div>
-        <h5 className="mt-4"> OutStandings</h5>
+        <h5 className="mt-4"> Outstanding</h5>
           <Table bordered className="mt-2">
             <thead>
               <tr>
@@ -81,15 +81,18 @@ function ViewReport() {
               </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
+                {report.outstandings.map((out)=>{
+                    return <tr key={out._id}>
+                    <td>{out.shop.name}</td>
+                    <td>{out.amount} <span>&#8377;</span></td>
                 </tr>
+                })}
+                
             </tbody>
           </Table>
         </div>
         <div>
-        <h5 className="mt-4"></h5>
+        <h5 className="mt-4">Outstanding Collections</h5>
           <Table bordered className="mt-2">
             <thead>
               <tr>
@@ -98,10 +101,13 @@ function ViewReport() {
               </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
+                {report.payments.map((pay)=>{
+                    return <tr key={pay._id}>
+                    <td>{pay.shop.name}</td>
+                    <td>{pay.amount}</td>
                 </tr>
+                })}
+                
             </tbody>
           </Table>
         </div>
