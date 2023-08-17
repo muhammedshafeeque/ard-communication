@@ -1,4 +1,4 @@
 import  express  from "express";
 const router =express.router
-router.get('/sale')
+// router.get('/sale')
 export const VisualizationRouter=router
