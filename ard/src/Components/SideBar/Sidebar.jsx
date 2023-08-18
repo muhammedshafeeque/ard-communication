@@ -7,7 +7,7 @@ import { AdminSideBar, HomeSidebar } from "../../Constants/Sidebar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { nav } from "../../Constants/routes";
 import { RiLogoutBoxRLine } from "react-icons/ri";
-
+import {BiMenu} from 'react-icons/bi'
 function Sidebar() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -25,7 +25,7 @@ function Sidebar() {
 
   return (
     <>
-      <h4 onClick={handleShow}>ARD COMMUNICATIONS</h4>
+      <h4 onClick={handleShow}><BiMenu fontSize={"40px"} cursor={"pointer"}/>ARD COMMUNICATIONS</h4>
 
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
