@@ -5,11 +5,13 @@ import { BiSolidPurchaseTag } from "react-icons/bi";
 import { BiAddToQueue } from "react-icons/bi";
 import { TbCirclesRelation, TbReportSearch } from "react-icons/tb";
 import { RiArchiveDrawerLine } from "react-icons/ri";
+import { PiPasswordBold } from "react-icons/pi";
 
 export const HomeSidebar = [
   { name: "Home", nav: nav.HOME, icon: AiOutlineHome },
   { name: "Shops", nav: nav.SHOPS, icon: AiFillShop },
   { name: "Report", nav: nav.REPORT_LIST, icon: TbReportSearch },
+  { name: "Reset Password", nav: nav.RESETPASSWORD, icon: PiPasswordBold },
 ];
 export const AdminSideBar = [
   { name: "Home", nav: nav.ADMIN_HOME, icon: AiOutlineHome },
