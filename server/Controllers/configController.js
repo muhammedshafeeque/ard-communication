@@ -95,8 +95,15 @@ export const getDses = async (req, res, next) => {
 };
 export const createShop = async (req, res, next) => {
   try {
+    
     await checkNumberExist(req.body.mobile);
     await checkNumberExist(req.body.flexiNumber);
+    if(req.user.alias!=='admin'){
+      let dse = await DSE.findOne({
+        "activeUser.user": new mongoose.Types.ObjectId(req.user)
+      })
+      req.body.line=dse.lines[0]
+    }
     await Shope.create(req.body);
     res.send("shop crated Successfully");
   } catch (error) {
@@ -138,7 +145,7 @@ export const getShops = async (req, res, next) => {
       } else {
         next({
           status: 400,
-          message: "Dse not Assaigned to you please contact  admin",
+          message: "Dse not Assigned to you please contact  admin",
         });
       }
     }
@@ -155,7 +162,7 @@ export const removeShop = async (req, res, next) => {
       if (shop.outstandings > 0) {
         next({
           status: 400,
-          message: "shope has Outstanding Balence , please clear all balances",
+          message: "shope has Outstanding Balance , please clear all balances",
         });
       } else {
         await Shope.findByIdAndRemove(req.params.id);
