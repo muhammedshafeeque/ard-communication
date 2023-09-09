@@ -4,19 +4,21 @@ import { searchUser } from "../Service/searchSearch.service.js";
 import { userRegisterEmail } from "../Templates/emailTemplate.js";
 import {
   comparePassword,
-  encriptString,
+ 
+  encryptString,
+ 
   numberGenerator,
 } from "../Utils/utils.js";
 
-export const craeteUser = async (req, res, next) => {
+export const createUser = async (req, res, next) => {
   const { mobile, name, email } = req.body;
   try {
     let exist = await User.findOne({ mobile: mobile });
     if (exist) {
-      next({ status: 400, message: "User Allready Exist" });
+      next({ status: 400, message: "User Already Exist" });
     } else {
       let password = await numberGenerator(12, true);
-      let Password = await encriptString(password);
+      let Password = await encryptString(password);
       let user = await User.create({ mobile: mobile, password: Password });
       await Profile.create({
         name,
@@ -50,9 +52,9 @@ export const resetPassword = async (req, res, next) => {
       user.password
     );
     if (!verifiedPassWord) {
-      next({ status: 400, message: "Old Password Missmatch" });
+      next({ status: 400, message: "Old Password Mismatch" });
     } else {
-      let Password = await encriptString(req.body.newPassword);
+      let Password = await encryptString(req.body.newPassword);
       await User.findByIdAndUpdate(String(req.user.userId), {
         $set: {
           password: Password,

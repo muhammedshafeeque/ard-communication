@@ -1,4 +1,5 @@
 import  express  from "express";
-const router =express.router
-// router.get('/sale')
+import { getSaleData } from "../Controllers/Viz.Controller.js";
+const router =express.Router()
+router.get('/sale',getSaleData)
 export const VisualizationRouter=router
